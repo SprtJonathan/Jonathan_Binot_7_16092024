@@ -9,10 +9,10 @@ namespace Dot.Net.WebApi.Controllers
     {             
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        public Task<IActionResult> Login([FromBody] LoginModel model)
         {
             //TODO: implement the UserManager from Identity to validate User and return a security token.
-            return Unauthorized();
+            return Task.FromResult<IActionResult>(Unauthorized());
         }            
     }
 }
