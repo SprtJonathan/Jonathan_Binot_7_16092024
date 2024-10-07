@@ -13,8 +13,8 @@ namespace P7CreateRestApi.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
-        [MinLength(6, ErrorMessage = "Password must be at least 6 characters long")]
-        [RegularExpression("^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,}$", ErrorMessage = "Username cannot contain special characters and must be at least 3 characters long")]
+        [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
+        [RegularExpression("^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,}$", ErrorMessage = "Password must be at least 8 characters long, must include at least 1 uppercase, 1 number and 1 special character")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Fullname is required")]
