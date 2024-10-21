@@ -1,5 +1,5 @@
-﻿using Dot.Net.WebApi.Data;
-using Dot.Net.WebApi.Domain;
+﻿using P7CreateRestApi.Data;
+using P7CreateRestApi.Domain;
 using System.Security.Cryptography;
 
 namespace P7CreateRestApi.Repositories

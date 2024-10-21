@@ -1,6 +1,6 @@
-﻿using Dot.Net.WebApi.Controllers;
-using Dot.Net.WebApi.Data;
-using Dot.Net.WebApi.Domain;
+﻿using P7CreateRestApi.Controllers;
+using P7CreateRestApi.Data;
+using P7CreateRestApi.Domain;
 using Microsoft.EntityFrameworkCore;
 
 

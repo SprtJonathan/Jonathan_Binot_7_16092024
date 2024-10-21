@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace Dot.Net.WebApi.Domain
+namespace P7CreateRestApi.Domain
 {
     public class User : IdentityUser<int>
     {

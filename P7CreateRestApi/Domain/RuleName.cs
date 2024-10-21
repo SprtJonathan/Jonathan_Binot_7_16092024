@@ -1,4 +1,4 @@
-namespace Dot.Net.WebApi.Controllers
+namespace P7CreateRestApi.Controllers
 {
     public class RuleName
     {

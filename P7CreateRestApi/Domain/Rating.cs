@@ -1,4 +1,4 @@
-namespace Dot.Net.WebApi.Controllers.Domain
+namespace P7CreateRestApi.Controllers.Domain
 {
     public class Rating
     {

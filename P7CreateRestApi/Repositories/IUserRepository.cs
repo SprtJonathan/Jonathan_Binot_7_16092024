@@ -1,8 +1,8 @@
-﻿using Dot.Net.WebApi.Domain;
+﻿using P7CreateRestApi.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Dot.Net.WebApi.Repositories
+namespace P7CreateRestApi.Repositories
 {
     public interface IUserRepository
     {

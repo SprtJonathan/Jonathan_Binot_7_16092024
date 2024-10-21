@@ -1,13 +1,44 @@
-using Dot.Net.WebApi.Domain;
+using P7CreateRestApi.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using P7CreateRestApi.Repositories;
 
-namespace Dot.Net.WebApi.Controllers
+namespace P7CreateRestApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Policy = "AuthenticatedOnly")]
     public class BidListController : ControllerBase
     {
+        private readonly IBidRepository _bidRepository;
+
+        public BidListController(IBidRepository bidRepository, ILogger<BidListController> logger)
+        {
+            _bidRepository = bidRepository;
+        }
+
+
+        // Récupération de tous les Bid
         [HttpGet]
+        public async Task<IActionResult> GetAllBids()
+        {
+            try
+            {
+                var bids = await _bidRepository.GetAllBidsAsync();
+                if (bids == null || !bids.Any())
+                {
+                    return NotFound();
+                }
+                return Ok(bids);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while retrieving all Bids");
+            }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User, Admin")]
         [Route("validate")]
         public IActionResult Validate([FromBody] BidList bidList)
         {
@@ -16,6 +47,7 @@ namespace Dot.Net.WebApi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "User, Admin")]
         [Route("update/{id}")]
         public IActionResult ShowUpdateForm(int id)
         {
@@ -23,6 +55,7 @@ namespace Dot.Net.WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "User, Admin")]
         [Route("update/{id}")]
         public IActionResult UpdateBid(int id, [FromBody] BidList bidList)
         {
@@ -31,6 +64,7 @@ namespace Dot.Net.WebApi.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "User, Admin")]
         [Route("{id}")]
         public IActionResult DeleteBid(int id)
         {
