@@ -8,18 +8,28 @@ using Microsoft.OpenApi.Models;
 using P7CreateRestApi.Services;
 using P7CreateRestApi.Domain;
 using System.Text;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configuration de Serilog pour un fichier de log avec rotation journalière
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+// Ajoute Serilog comme fournisseur de logs principal
+builder.Host.UseSerilog();
+
 ConfigurationManager configuration = builder.Configuration;
 
 // Configuration des services
 builder.Services.AddDbContext<LocalDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
 {
     options.User.RequireUniqueEmail = true;
-    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; // Permet uniquement lettres et chiffres
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireUppercase = true;
@@ -27,26 +37,24 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
     options.Password.RequiredLength = 8;
     options.Password.RequiredUniqueChars = 1;
 })
-    .AddEntityFrameworkStores<LocalDbContext>()
-    .AddDefaultTokenProviders();
-
+.AddEntityFrameworkStores<LocalDbContext>()
+.AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.Events = new JwtBearerEvents
         {
-
             OnAuthenticationFailed = context =>
             {
-                var _logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-                _logger.LogError("Authentication failed: {Message}", context.Exception.Message);
+                var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
+                logger.LogError("Authentication failed: {Message}", context.Exception.Message);
                 return Task.CompletedTask;
             },
             OnTokenValidated = context =>
             {
-                var _logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-                _logger.LogInformation("Token validated for user: {UserName}", context.Principal?.Identity?.Name);
+                var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
+                logger.LogInformation("Token validated for user: {UserName}", context.Principal?.Identity?.Name);
                 return Task.CompletedTask;
             },
             OnChallenge = context =>
@@ -58,7 +66,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             OnForbidden = context =>
             {
                 var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-                // Access the user from the HttpContext
                 var userName = context.HttpContext.User.Identity?.Name ?? "Anonymous";
                 logger.LogWarning("Forbidden access attempt to {Path} by {User}", context.Request.Path, userName);
                 return Task.CompletedTask;
@@ -70,9 +77,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Issuer"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            ValidIssuer = configuration["Jwt:Issuer"],
+            ValidAudience = configuration["Jwt:Issuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
         };
     });
 
@@ -80,7 +87,7 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
-    options.AddPolicy("AuthenticatedOnly", policy => policy.RequireRole(["User", "Admin"]));
+    options.AddPolicy("AuthenticatedOnly", policy => policy.RequireRole(new[] { "User", "Admin" }));
 });
 
 // Ajout des services de l'application
@@ -91,7 +98,6 @@ builder.Services.AddScoped<IRuleRepository, RuleRepository>();
 builder.Services.AddScoped<ITradeRepository, TradeRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJwtService, JwtService>();
-builder.Services.AddScoped<RoleSeeder>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -130,8 +136,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();   
+    app.UseSwaggerUI();
 }
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -142,4 +149,16 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+try
+{
+    Log.Information("Démarrage de l'application");
+    app.Run();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "L'application n'a pas pu démarrer correctement");
+}
+finally
+{
+    Log.CloseAndFlush(); // Vide les logs avant de fermer
+}

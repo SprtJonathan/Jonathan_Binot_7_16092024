@@ -41,7 +41,53 @@ namespace P7CreateRestApi.Data
             builder.Entity<IdentityUserRole<int>>().HasKey(r => new { r.UserId, r.RoleId });
             builder.Entity<IdentityUserToken<int>>().HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
 
-            // Seed data
+            // Seed data for roles
+            var adminRole = new IdentityRole<int> { Id = 1, Name = "Admin", NormalizedName = "ADMIN" };
+            var userRole = new IdentityRole<int> { Id = 2, Name = "User", NormalizedName = "USER" };
+
+            builder.Entity<IdentityRole<int>>().HasData(adminRole, userRole);
+
+            // Password hasher for seeding users with hashed passwords
+            var hasher = new PasswordHasher<User>();
+
+            // Seed data for users
+            var adminUser = new User
+            {
+                Id = 1,
+                Fullname = "Admin Primary",
+                UserName = "admin",
+                Role = "Admin",
+                NormalizedUserName = "ADMIN",
+                Email = "admin@example.com",
+                NormalizedEmail = "ADMIN@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "AdminPassword123!"),
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+            var normalUser = new User
+            {
+                Id = 2,
+                Fullname = "User Primary",
+                UserName = "user",
+                Role = "User",
+                NormalizedUserName = "USER",
+                Email = "user@example.com",
+                NormalizedEmail = "USER@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "UserPassword123!"),
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+            builder.Entity<User>().HasData(adminUser, normalUser);
+
+            // Assign roles to users
+            builder.Entity<IdentityUserRole<int>>().HasData(
+                new IdentityUserRole<int> { UserId = adminUser.Id, RoleId = adminRole.Id },
+                new IdentityUserRole<int> { UserId = normalUser.Id, RoleId = userRole.Id }
+            );
+
+
             builder.Entity<BidList>().HasData(
                 new BidList
                 {
