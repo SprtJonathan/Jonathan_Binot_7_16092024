@@ -1,7 +1,6 @@
 ﻿using P7CreateRestApi.Data;
 using P7CreateRestApi.Domain;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
 
 namespace P7CreateRestApi.Repositories
 {

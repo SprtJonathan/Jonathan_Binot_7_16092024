@@ -1,0 +1,20 @@
+2024-11-12 11:54:57.857 +01:00 [INF] Démarrage de l'application
+2024-11-12 11:54:57.924 +01:00 [INF] User profile is available. Using 'C:\Users\sprtj\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-11-12 11:54:58.146 +01:00 [INF] Now listening on: https://localhost:7210
+2024-11-12 11:54:58.146 +01:00 [INF] Now listening on: http://localhost:5267
+2024-11-12 11:54:58.183 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-12 11:54:58.184 +01:00 [INF] Hosting environment: Development
+2024-11-12 11:54:58.184 +01:00 [INF] Content root path: C:\Users\sprtj\Documents\GitHub\P7_Binot_Jonathan\P7CreateRestApi
+2024-11-12 11:54:58.643 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-11-12 11:54:58.775 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 135.9256ms
+2024-11-12 11:54:58.806 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-12 11:54:58.806 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-11-12 11:54:58.806 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.css - null null
+2024-11-12 11:54:58.808 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 2.7251ms
+2024-11-12 11:54:58.813 +01:00 [INF] The file /index.css was not modified
+2024-11-12 11:54:58.814 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.css - 304 null text/css 8.7433ms
+2024-11-12 11:54:58.816 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 10.2909ms
+2024-11-12 11:55:02.060 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-11-12 11:55:02.092 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 32.6254ms
+2024-11-12 11:55:02.516 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-11-12 11:55:02.619 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 104.0626ms

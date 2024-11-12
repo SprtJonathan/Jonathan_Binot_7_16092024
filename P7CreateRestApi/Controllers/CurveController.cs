@@ -1,11 +1,12 @@
 using P7CreateRestApi.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using P7CreateRestApi.Repositories;
-using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace P7CreateRestApi.Controllers
 {
@@ -26,6 +27,7 @@ namespace P7CreateRestApi.Controllers
         /// Récupération de tous les CurvePoints       
         /// </summary>
         [HttpGet]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> GetAllCurvePoints()
         {
             _logger.LogInformation("Tentative de récupération de tous les CurvePoints.");
@@ -53,7 +55,7 @@ namespace P7CreateRestApi.Controllers
         /// Récupération d'un CurvePoint par son Id
         /// </summary>
         [HttpGet("{id}")]
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> GetCurvePointById(int id)
         {
             _logger.LogInformation("Tentative de récupération du CurvePoint avec ID {CurvePointId}.", id);
@@ -81,7 +83,7 @@ namespace P7CreateRestApi.Controllers
         /// Ajout d'un CurvePoint
         /// </summary>
         [HttpPost]
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> CreateCurvePoint([FromBody] CurvePoint curvePoint)
         {
             _logger.LogInformation("Tentative de création d'un nouveau CurvePoint.");
@@ -115,7 +117,7 @@ namespace P7CreateRestApi.Controllers
         /// Mettre un CurvePoint à jour
         /// </summary>
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> UpdateCurvePoint(int id, [FromBody] CurvePoint curvePoint)
         {
             _logger.LogInformation("Tentative de mise à jour du CurvePoint avec ID {CurvePointId}.", id);
@@ -155,7 +157,7 @@ namespace P7CreateRestApi.Controllers
         /// Supprimer un CurvePoint
         /// </summary>
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteCurvePoint(int id)
         {
             _logger.LogInformation("Tentative de suppression du CurvePoint avec ID {CurvePointId}.", id);

@@ -1,10 +1,7 @@
 using P7CreateRestApi.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using P7CreateRestApi.Repositories;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace P7CreateRestApi.Controllers
 {
@@ -25,6 +22,7 @@ namespace P7CreateRestApi.Controllers
         /// Récupération de tous les Trades       
         /// </summary>
         [HttpGet]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> GetAllTrades()
         {
             _logger.LogInformation("Tentative de récupération de tous les Trades.");
@@ -35,7 +33,7 @@ namespace P7CreateRestApi.Controllers
                 if (trades == null || !trades.Any())
                 {
                     _logger.LogWarning("Aucun Trade trouvé.");
-                    return NotFound();
+                    return Ok(new List<Trade>());
                 }
 
                 _logger.LogInformation("{TradeCount} Trades récupérés avec succès.", trades.Count());
@@ -52,6 +50,7 @@ namespace P7CreateRestApi.Controllers
         /// Récupération d'un Trade par son Id
         /// </summary>
         [HttpGet("{id}")]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> GetTradeById(int id)
         {
             _logger.LogInformation("Tentative de récupération du Trade avec ID {TradeId}.", id);
@@ -79,6 +78,7 @@ namespace P7CreateRestApi.Controllers
         /// Ajout d'un Trade
         /// </summary>
         [HttpPost]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> CreateTrade([FromBody] Trade trade)
         {
             _logger.LogInformation("Tentative de création d'un nouveau Trade.");
@@ -112,6 +112,7 @@ namespace P7CreateRestApi.Controllers
         /// Mettre un Trade à jour
         /// </summary>
         [HttpPut("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> UpdateTrade(int id, [FromBody] Trade trade)
         {
             _logger.LogInformation("Tentative de mise à jour du Trade avec ID {TradeId}.", id);
@@ -143,7 +144,7 @@ namespace P7CreateRestApi.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Une erreur est survenue lors de la mise à jour du Trade avec ID {TradeId}.", id);
-                return StatusCode(500, "Erreur interne du serveur");
+                return StatusCode(500, "Une erreur est survenue lors de la mise à jour du Trade");
             }
         }
 
@@ -151,6 +152,7 @@ namespace P7CreateRestApi.Controllers
         /// Supprimer un Trade
         /// </summary>
         [HttpDelete("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteTrade(int id)
         {
             _logger.LogInformation("Tentative de suppression du Trade avec ID {TradeId}.", id);

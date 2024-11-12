@@ -22,6 +22,7 @@ namespace P7CreateRestApi.Controllers
         /// Récupération de tous les Bids       
         /// </summary>
         [HttpGet]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> GetAllBids()
         {
             _logger.LogInformation("Tentative de récupération de tous les Bids.");
@@ -49,7 +50,7 @@ namespace P7CreateRestApi.Controllers
         /// Récupération d'un Bid par son Id
         /// </summary>
         [HttpGet("{id}")]
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> GetBidById(int id)
         {
             _logger.LogInformation("Tentative de récupération du Bid avec ID {BidId}.", id);
@@ -77,7 +78,7 @@ namespace P7CreateRestApi.Controllers
         /// Ajout d'un Bid
         /// </summary>
         [HttpPost]
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> CreateBid([FromBody] BidList bid)
         {
             _logger.LogInformation("Tentative de création d'un nouveau Bid.");
@@ -111,7 +112,7 @@ namespace P7CreateRestApi.Controllers
         /// Mettre un Bid à jour
         /// </summary>
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> UpdateBid(int id, [FromBody] BidList bid)
         {
             _logger.LogInformation("Tentative de mise à jour du Bid avec ID {BidListId}.", id);
@@ -151,7 +152,7 @@ namespace P7CreateRestApi.Controllers
         /// Supprimer un Bid
         /// </summary>
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteBid(int id)
         {
             _logger.LogInformation("Tentative de suppression du Bid avec ID {BidListId}.", id);

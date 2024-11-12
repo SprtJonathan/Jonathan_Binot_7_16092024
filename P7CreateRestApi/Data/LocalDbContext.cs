@@ -4,7 +4,6 @@ using System.Reflection.Emit;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using P7CreateRestApi.Controllers.Domain;
 using P7CreateRestApi.Controllers;
 
 namespace P7CreateRestApi.Data

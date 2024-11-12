@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using P7CreateRestApi.Domain;
 using P7CreateRestApi.Models;
 using P7CreateRestApi.Repositories;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace P7CreateRestApi.Controllers
 {
@@ -25,61 +27,31 @@ namespace P7CreateRestApi.Controllers
             _logger = logger;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterModel register)
+        /// <summary>
+        /// Récupération de tous les utilisateurs
+        /// </summary>
+        [HttpGet]
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> GetAllUsers()
         {
-            _logger.LogInformation("Début de la tentative d'enregistrement d'un nouvel utilisateur.");
+            _logger.LogInformation("Tentative de récupération de tous les utilisateurs.");
 
-            if (!ModelState.IsValid)
+            var users = await _userRepository.GetAllUsersAsync();
+            if (users == null || !users.Any())
             {
-                _logger.LogError("Échec de la validation du modèle lors de l'enregistrement d'un utilisateur.");
-                return BadRequest(ModelState);
+                _logger.LogWarning("Aucun utilisateur trouvé.");
+                return Ok(new List<User>());
             }
 
-            // Vérifier si le rôle existe, sinon le créer
-            if (!await _roleManager.RoleExistsAsync(register.Role))
-            {
-                _logger.LogWarning("Le rôle {Role} n'existe pas. Tentative de création du rôle.", register.Role);
-                var createRoleResult = await _roleManager.CreateAsync(new IdentityRole<int> { Name = register.Role });
-                if (!createRoleResult.Succeeded)
-                {
-                    _logger.LogError("Impossible de créer le rôle {Role}. Erreurs: {Errors}", register.Role, string.Join(", ", createRoleResult.Errors.Select(e => e.Description)));
-                    return StatusCode(StatusCodes.Status500InternalServerError, "Unable to create role.");
-                }
-                _logger.LogInformation("Rôle {Role} créé avec succès.", register.Role);
-            }
-            else
-            {
-                _logger.LogInformation("Le rôle {Role} existe déjà.", register.Role);
-            }
-
-            var user = new User
-            {
-                UserName = register.UserName,
-                Email = register.Email,
-                Fullname = register.Fullname,
-                Role = register.Role
-            };
-
-            // Créer l'utilisateur avec un mot de passe
-            var result = await _userManager.CreateAsync(user, register.Password);
-            if (result.Succeeded)
-            {
-                _logger.LogInformation("Utilisateur {UserName} créé avec succès. Tentative d'ajout de l'utilisateur au rôle {Role}.", register.UserName, register.Role);
-                await _userManager.AddToRoleAsync(user, register.Role);
-                _logger.LogInformation("Utilisateur {UserName} ajouté au rôle {Role} avec succès.", register.UserName, register.Role);
-                return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
-            }
-
-            // Log les erreurs de création d'utilisateur
-            var errors = result.Errors.Select(e => e.Description);
-            _logger.LogError("Échec de la création de l'utilisateur {UserName}. Erreurs: {Errors}", register.UserName, string.Join(", ", errors));
-
-            return BadRequest(new { Errors = errors });
+            _logger.LogInformation("{UserCount} utilisateurs récupérés avec succès.", users.Count());
+            return Ok(users);
         }
 
+        /// <summary>
+        /// Récupération d'un utilisateur par son Id
+        /// </summary>
         [HttpGet("{id}")]
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> GetUserById(int id)
         {
             _logger.LogInformation("Tentative de récupération de l'utilisateur avec ID {UserId}.", id);
@@ -95,20 +67,62 @@ namespace P7CreateRestApi.Controllers
             return Ok(user);
         }
 
-        [HttpGet]
-        [Authorize(Roles = "User, Admin")]
-        public async Task<IActionResult> GetAllUsers()
+        /// <summary>
+        /// Enregistrement d'un nouvel utilisateur
+        /// </summary>
+        [HttpPost("register")]        
+        public async Task<IActionResult> Register([FromBody] RegisterModel register)
         {
-            _logger.LogInformation("Récupération de la liste de tous les utilisateurs.");
+            _logger.LogInformation("Début de la tentative d'enregistrement d'un nouvel utilisateur.");
 
-            var users = await _userRepository.GetAllUsersAsync();
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("ModelState non valide pour l'enregistrement de l'utilisateur.");
+                return BadRequest(ModelState);
+            }
 
-            _logger.LogInformation("{UserCount} utilisateurs récupérés avec succès.", users.Count());
-            return Ok(users);
+            // Vérifier si le rôle existe, sinon le créer
+            if (!await _roleManager.RoleExistsAsync(register.Role))
+            {
+                _logger.LogWarning("Le rôle {Role} n'existe pas. Création du rôle.", register.Role);
+                var createRoleResult = await _roleManager.CreateAsync(new IdentityRole<int> { Name = register.Role });
+                if (!createRoleResult.Succeeded)
+                {
+                    _logger.LogError("Impossible de créer le rôle {Role}. Erreurs: {Errors}", register.Role, string.Join(", ", createRoleResult.Errors.Select(e => e.Description)));
+                    return StatusCode(500, "Impossible de créer le rôle.");
+                }
+                _logger.LogInformation("Rôle {Role} créé avec succès.", register.Role);
+            }
+
+            var user = new User
+            {
+                UserName = register.UserName,
+                Email = register.Email,
+                Fullname = register.Fullname,
+                Role = register.Role
+            };
+
+            // Créer l'utilisateur avec un mot de passe
+            var result = await _userManager.CreateAsync(user, register.Password);
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("Utilisateur {UserName} créé avec succès.", register.UserName);
+                await _userManager.AddToRoleAsync(user, register.Role);
+                _logger.LogInformation("Utilisateur {UserName} ajouté au rôle {Role}.", register.UserName, register.Role);
+                return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
+            }
+
+            // Log les erreurs de création d'utilisateur
+            var errors = result.Errors.Select(e => e.Description);
+            _logger.LogError("Échec de la création de l'utilisateur {UserName}. Erreurs: {Errors}", register.UserName, string.Join(", ", errors));
+            return BadRequest(new { Errors = errors });
         }
 
+        /// <summary>
+        /// Mise à jour d'un utilisateur
+        /// </summary>
         [HttpPut("{id}")]
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] RegisterModel register)
         {
             _logger.LogInformation("Tentative de mise à jour de l'utilisateur avec ID {UserId}.", id);
@@ -116,7 +130,7 @@ namespace P7CreateRestApi.Controllers
             if (id <= 0 || register == null)
             {
                 _logger.LogWarning("ID invalide ou corps de la requête nul pour la mise à jour de l'utilisateur avec ID {UserId}.", id);
-                return BadRequest("Invalid ID or request body.");
+                return BadRequest("ID invalide ou corps de la requête nul.");
             }
 
             try
@@ -139,7 +153,7 @@ namespace P7CreateRestApi.Controllers
                     await _userManager.RemoveFromRoleAsync(user, user.Role);
                     if (!await _roleManager.RoleExistsAsync(register.Role))
                     {
-                        _logger.LogInformation("Le rôle {Role} n'existe pas. Tentative de création du rôle.", register.Role);
+                        _logger.LogInformation("Le rôle {Role} n'existe pas. Création du rôle.", register.Role);
                         await _roleManager.CreateAsync(new IdentityRole<int> { Name = register.Role });
                     }
                     await _userManager.AddToRoleAsync(user, register.Role);
@@ -160,12 +174,15 @@ namespace P7CreateRestApi.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erreur lors de la mise à jour de l'utilisateur avec ID {UserId}.", id);
-                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+                return StatusCode(500, "Erreur interne du serveur");
             }
         }
 
+        /// <summary>
+        /// Suppression d'un utilisateur
+        /// </summary>
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             _logger.LogInformation("Tentative de suppression de l'utilisateur avec ID {UserId}.", id);
@@ -183,7 +200,7 @@ namespace P7CreateRestApi.Controllers
                 if (!result)
                 {
                     _logger.LogError("Échec de la suppression de l'utilisateur avec ID {UserId}.", id);
-                    return BadRequest("Failed to delete user.");
+                    return BadRequest("Échec de la suppression de l'utilisateur.");
                 }
 
                 _logger.LogInformation("Utilisateur avec ID {UserId} supprimé avec succès.", id);
@@ -192,10 +209,8 @@ namespace P7CreateRestApi.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erreur lors de la suppression de l'utilisateur avec ID {UserId}.", id);
-                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+                return StatusCode(500, "Erreur interne du serveur");
             }
         }
-
-
     }
 }

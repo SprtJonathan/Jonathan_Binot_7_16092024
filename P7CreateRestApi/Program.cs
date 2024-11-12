@@ -9,6 +9,7 @@ using P7CreateRestApi.Services;
 using P7CreateRestApi.Domain;
 using System.Text;
 using Serilog;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -86,7 +87,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
-    options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
     options.AddPolicy("AuthenticatedOnly", policy => policy.RequireRole(new[] { "User", "Admin" }));
 });
 

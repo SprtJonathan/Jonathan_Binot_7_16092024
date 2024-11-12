@@ -1,10 +1,7 @@
 using P7CreateRestApi.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using P7CreateRestApi.Repositories;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace P7CreateRestApi.Controllers
 {
@@ -25,6 +22,7 @@ namespace P7CreateRestApi.Controllers
         /// Récupération de tous les RuleNames       
         /// </summary>
         [HttpGet]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> GetAllRuleNames()
         {
             _logger.LogInformation("Tentative de récupération de tous les RuleNames.");
@@ -35,7 +33,7 @@ namespace P7CreateRestApi.Controllers
                 if (ruleNames == null || !ruleNames.Any())
                 {
                     _logger.LogWarning("Aucun RuleName trouvé.");
-                    return NotFound();
+                    return Ok(new List<RuleName>());
                 }
 
                 _logger.LogInformation("{RuleNameCount} RuleNames récupérés avec succès.", ruleNames.Count());
@@ -52,6 +50,7 @@ namespace P7CreateRestApi.Controllers
         /// Récupération d'un RuleName par son Id
         /// </summary>
         [HttpGet("{id}")]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> GetRuleNameById(int id)
         {
             _logger.LogInformation("Tentative de récupération du RuleName avec ID {RuleNameId}.", id);
@@ -79,6 +78,7 @@ namespace P7CreateRestApi.Controllers
         /// Ajout d'un RuleName
         /// </summary>
         [HttpPost]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> CreateRuleName([FromBody] RuleName ruleName)
         {
             _logger.LogInformation("Tentative de création d'un nouveau RuleName.");
@@ -112,6 +112,7 @@ namespace P7CreateRestApi.Controllers
         /// Mettre un RuleName à jour
         /// </summary>
         [HttpPut("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> UpdateRuleName(int id, [FromBody] RuleName ruleName)
         {
             _logger.LogInformation("Tentative de mise à jour du RuleName avec ID {RuleNameId}.", id);
@@ -151,6 +152,7 @@ namespace P7CreateRestApi.Controllers
         /// Supprimer un RuleName
         /// </summary>
         [HttpDelete("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteRuleName(int id)
         {
             _logger.LogInformation("Tentative de suppression du RuleName avec ID {RuleNameId}.", id);

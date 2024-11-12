@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace P7CreateRestApi.Controllers
+namespace P7CreateRestApi.Domain
 {
     public class RuleName
     {

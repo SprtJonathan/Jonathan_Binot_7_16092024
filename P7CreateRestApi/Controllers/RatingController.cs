@@ -1,11 +1,12 @@
 using P7CreateRestApi.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using P7CreateRestApi.Repositories;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using P7CreateRestApi.Controllers.Domain;
 
 namespace P7CreateRestApi.Controllers
 {
@@ -26,6 +27,7 @@ namespace P7CreateRestApi.Controllers
         /// Récupération de tous les Ratings       
         /// </summary>
         [HttpGet]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> GetAllRatings()
         {
             _logger.LogInformation("Tentative de récupération de tous les Ratings.");
@@ -36,7 +38,7 @@ namespace P7CreateRestApi.Controllers
                 if (ratings == null || !ratings.Any())
                 {
                     _logger.LogWarning("Aucun Rating trouvé.");
-                    return NotFound();
+                    return Ok(new List<Rating>());
                 }
 
                 _logger.LogInformation("{RatingCount} Ratings récupérés avec succès.", ratings.Count());
@@ -53,6 +55,7 @@ namespace P7CreateRestApi.Controllers
         /// Récupération d'un Rating par son Id
         /// </summary>
         [HttpGet("{id}")]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> GetRatingById(int id)
         {
             _logger.LogInformation("Tentative de récupération du Rating avec ID {RatingId}.", id);
@@ -80,6 +83,7 @@ namespace P7CreateRestApi.Controllers
         /// Ajout d'un Rating
         /// </summary>
         [HttpPost]
+        [Authorize(Policy = "AuthenticatedOnly")]
         public async Task<IActionResult> CreateRating([FromBody] Rating rating)
         {
             _logger.LogInformation("Tentative de création d'un nouveau Rating.");
@@ -113,6 +117,7 @@ namespace P7CreateRestApi.Controllers
         /// Mettre un Rating à jour
         /// </summary>
         [HttpPut("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> UpdateRating(int id, [FromBody] Rating rating)
         {
             _logger.LogInformation("Tentative de mise à jour du Rating avec ID {RatingId}.", id);
@@ -152,6 +157,7 @@ namespace P7CreateRestApi.Controllers
         /// Supprimer un Rating
         /// </summary>
         [HttpDelete("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteRating(int id)
         {
             _logger.LogInformation("Tentative de suppression du Rating avec ID {RatingId}.", id);
