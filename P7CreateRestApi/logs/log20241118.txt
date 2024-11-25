@@ -1,0 +1,239 @@
+2024-11-18 11:30:46.547 +01:00 [INF] Démarrage de l'application
+2024-11-18 11:30:46.614 +01:00 [INF] User profile is available. Using 'C:\Users\sprtj\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-11-18 11:30:46.848 +01:00 [INF] Now listening on: https://localhost:7210
+2024-11-18 11:30:46.848 +01:00 [INF] Now listening on: http://localhost:5267
+2024-11-18 11:30:46.891 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-18 11:30:46.891 +01:00 [INF] Hosting environment: Development
+2024-11-18 11:30:46.891 +01:00 [INF] Content root path: C:\Users\sprtj\Documents\GitHub\P7_Binot_Jonathan\P7CreateRestApi
+2024-11-18 11:31:01.388 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-11-18 11:31:01.671 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 290.6222ms
+2024-11-18 11:31:01.752 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-18 11:31:01.760 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.css - null null
+2024-11-18 11:31:01.760 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/swagger-ui.css - null null
+2024-11-18 11:31:01.762 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/swagger-ui-standalone-preset.js - null null
+2024-11-18 11:31:01.768 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/swagger-ui-bundle.js - null null
+2024-11-18 11:31:01.769 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-11-18 11:31:01.769 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 16.8294ms
+2024-11-18 11:31:01.770 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-11-18 11:31:01.802 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 32.234ms
+2024-11-18 11:31:01.808 +01:00 [INF] The file /swagger-ui-bundle.js was not modified
+2024-11-18 11:31:01.808 +01:00 [INF] The file /swagger-ui.css was not modified
+2024-11-18 11:31:01.808 +01:00 [INF] The file /swagger-ui-standalone-preset.js was not modified
+2024-11-18 11:31:01.808 +01:00 [INF] The file /index.css was not modified
+2024-11-18 11:31:01.811 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/swagger-ui.css - 304 null text/css 51.4504ms
+2024-11-18 11:31:01.811 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/swagger-ui-standalone-preset.js - 304 null text/javascript 49.1893ms
+2024-11-18 11:31:01.811 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/swagger-ui-bundle.js - 304 null text/javascript 43.8868ms
+2024-11-18 11:31:01.811 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.css - 304 null text/css 51.3601ms
+2024-11-18 11:31:02.121 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/favicon-16x16.png - null null
+2024-11-18 11:31:02.128 +01:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2024-11-18 11:31:02.128 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/favicon-16x16.png - 499 665 image/png 7.9695ms
+2024-11-18 11:31:02.371 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 601.7527ms
+2024-11-18 11:31:02.517 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-11-18 11:31:02.721 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 204.6258ms
+2024-11-18 11:31:04.361 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-11-18 11:31:04.368 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 7.0216ms
+2024-11-18 11:31:04.527 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-18 11:31:04.530 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-11-18 11:31:04.530 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 3.9389ms
+2024-11-18 11:31:04.531 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 0.8194ms
+2024-11-18 11:31:07.821 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-11-18 11:31:07.835 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 14.7307ms
+2024-11-18 11:31:08.679 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-11-18 11:31:08.697 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 17.8122ms
+2024-11-18 11:33:38.865 +01:00 [INF] Démarrage de l'application
+2024-11-18 11:33:38.911 +01:00 [INF] User profile is available. Using 'C:\Users\sprtj\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-11-18 11:33:39.046 +01:00 [INF] Now listening on: https://localhost:7210
+2024-11-18 11:33:39.047 +01:00 [INF] Now listening on: http://localhost:5267
+2024-11-18 11:33:39.073 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-18 11:33:39.073 +01:00 [INF] Hosting environment: Development
+2024-11-18 11:33:39.073 +01:00 [INF] Content root path: C:\Users\sprtj\Documents\GitHub\P7_Binot_Jonathan\P7CreateRestApi
+2024-11-18 11:33:42.123 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-11-18 11:33:42.230 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 111.4039ms
+2024-11-18 11:33:42.274 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-18 11:33:42.274 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/swagger-ui.css - null null
+2024-11-18 11:33:42.274 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.css - null null
+2024-11-18 11:33:42.276 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-11-18 11:33:42.284 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-11-18 11:33:42.287 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 11.0086ms
+2024-11-18 11:33:42.297 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 23.9278ms
+2024-11-18 11:33:42.298 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2024-11-18 11:33:42.298 +01:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2024-11-18 11:33:42.298 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.css - 499 202 text/css 24.0071ms
+2024-11-18 11:33:42.298 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/swagger-ui.css - 499 152034 text/css 24.7042ms
+2024-11-18 11:33:42.319 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 39.2767ms
+2024-11-18 11:33:42.420 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/favicon-16x16.png - null null
+2024-11-18 11:33:42.421 +01:00 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2024-11-18 11:33:42.421 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/favicon-16x16.png - 499 665 image/png 1.5284ms
+2024-11-18 11:33:42.465 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-11-18 11:33:42.598 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 133.3277ms
+2024-11-18 11:34:03.105 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/login - application/json 77
+2024-11-18 11:34:03.156 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-11-18 11:34:03.190 +01:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(P7CreateRestApi.Models.LoginModel) on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-11-18 11:34:15.555 +01:00 [INF] Tentative de connexion pour l'utilisateur user.
+2024-11-18 11:34:25.479 +01:00 [INF] Executed DbCommand (59ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-18 11:34:25.652 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-18 11:34:25.668 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2024-11-18 11:34:25.769 +01:00 [INF] Executed DbCommand (12ms) [Parameters=[@p16='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p17='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [ConcurrencyStamp] = @p1, [Email] = @p2, [EmailConfirmed] = @p3, [Fullname] = @p4, [LockoutEnabled] = @p5, [LockoutEnd] = @p6, [NormalizedEmail] = @p7, [NormalizedUserName] = @p8, [PasswordHash] = @p9, [PhoneNumber] = @p10, [PhoneNumberConfirmed] = @p11, [Role] = @p12, [SecurityStamp] = @p13, [TwoFactorEnabled] = @p14, [UserName] = @p15
+OUTPUT 1
+WHERE [Id] = @p16 AND [ConcurrencyStamp] = @p17;
+2024-11-18 11:34:25.780 +01:00 [WRN] Tentative de connexion non valide pour l'utilisateur user.
+2024-11-18 11:35:00.056 +01:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-11-18 11:35:00.065 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi) in 56871.0751ms
+2024-11-18 11:35:00.066 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-11-18 11:35:00.075 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/login - 499 null application/json; charset=utf-8 56970.2201ms
+2024-11-18 11:35:24.466 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/login - application/json 76
+2024-11-18 11:35:24.470 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-11-18 11:35:24.471 +01:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(P7CreateRestApi.Models.LoginModel) on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-11-18 11:35:27.036 +01:00 [INF] Tentative de connexion pour l'utilisateur user.
+2024-11-18 11:35:27.090 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-18 11:35:27.172 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-18 11:35:27.175 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2024-11-18 11:35:27.183 +01:00 [INF] Executed DbCommand (6ms) [Parameters=[@p16='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p17='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [ConcurrencyStamp] = @p1, [Email] = @p2, [EmailConfirmed] = @p3, [Fullname] = @p4, [LockoutEnabled] = @p5, [LockoutEnd] = @p6, [NormalizedEmail] = @p7, [NormalizedUserName] = @p8, [PasswordHash] = @p9, [PhoneNumber] = @p10, [PhoneNumberConfirmed] = @p11, [Role] = @p12, [SecurityStamp] = @p13, [TwoFactorEnabled] = @p14, [UserName] = @p15
+OUTPUT 1
+WHERE [Id] = @p16 AND [ConcurrencyStamp] = @p17;
+2024-11-18 11:35:27.183 +01:00 [WRN] Tentative de connexion non valide pour l'utilisateur user.
+2024-11-18 11:35:28.094 +01:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-11-18 11:35:28.094 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi) in 3623.1955ms
+2024-11-18 11:35:28.094 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-11-18 11:35:28.095 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/login - 401 null application/json; charset=utf-8 3628.6495ms
+2024-11-18 11:36:12.596 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/login - application/json 80
+2024-11-18 11:36:12.600 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-11-18 11:36:12.600 +01:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(P7CreateRestApi.Models.LoginModel) on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-11-18 11:36:14.751 +01:00 [INF] Tentative de connexion pour l'utilisateur user.
+2024-11-18 11:36:14.775 +01:00 [INF] Executed DbCommand (9ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-18 11:36:14.849 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-18 11:36:14.852 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2024-11-18 11:36:14.858 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[@p16='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p17='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [ConcurrencyStamp] = @p1, [Email] = @p2, [EmailConfirmed] = @p3, [Fullname] = @p4, [LockoutEnabled] = @p5, [LockoutEnd] = @p6, [NormalizedEmail] = @p7, [NormalizedUserName] = @p8, [PasswordHash] = @p9, [PhoneNumber] = @p10, [PhoneNumberConfirmed] = @p11, [Role] = @p12, [SecurityStamp] = @p13, [TwoFactorEnabled] = @p14, [UserName] = @p15
+OUTPUT 1
+WHERE [Id] = @p16 AND [ConcurrencyStamp] = @p17;
+2024-11-18 11:36:14.902 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-11-18 11:36:14.933 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-11-18 11:36:14.944 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-11-18 11:36:14.963 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__role_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2024-11-18 11:36:14.979 +01:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2024-11-18 11:36:14.980 +01:00 [INF] Connexion réussie pour l'utilisateur user.
+2024-11-18 11:36:14.981 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-18 11:36:15.005 +01:00 [INF] Début de la génération du jeton JWT pour l'utilisateur user (ID: 2)
+2024-11-18 11:36:15.007 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-11-18 11:36:15.008 +01:00 [INF] Récupération des revendications pour l'utilisateur user. Total: 0
+2024-11-18 11:36:15.010 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-11-18 11:36:15.010 +01:00 [INF] Récupération des rôles pour l'utilisateur user. Total: 1
+2024-11-18 11:36:15.010 +01:00 [INF] Les revendications et les rôles ont été ajoutés aux claims du jeton pour l'utilisateur user.
+2024-11-18 11:36:15.015 +01:00 [INF] Clé de sécurité et informations d'identification de signature créées pour le jeton.
+2024-11-18 11:36:15.019 +01:00 [INF] Le jeton JWT a été généré avec succès pour l'utilisateur user.
+2024-11-18 11:36:15.049 +01:00 [INF] Token JWT généré avec succès pour l'utilisateur user.
+2024-11-18 11:36:16.728 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-11-18 11:36:16.730 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi) in 4129.5996ms
+2024-11-18 11:36:16.730 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-11-18 11:36:16.730 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/login - 200 null application/json; charset=utf-8 4134.2588ms
+2024-11-18 11:36:46.785 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-11-18 11:36:46.802 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi)'
+2024-11-18 11:36:46.808 +01:00 [INF] Route matched with {action = "GetAllBids", controller = "BidList"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllBids() on controller P7CreateRestApi.Controllers.BidListController (P7CreateRestApi).
+2024-11-18 11:36:46.810 +01:00 [INF] Tentative de récupération de tous les Bids.
+2024-11-18 11:36:46.831 +01:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[BidListId], [b].[Account], [b].[Ask], [b].[AskQuantity], [b].[Benchmark], [b].[Bid], [b].[BidListDate], [b].[BidQuantity], [b].[BidSecurity], [b].[BidStatus], [b].[BidType], [b].[Book], [b].[Commentary], [b].[CreationDate], [b].[CreationName], [b].[DealName], [b].[DealType], [b].[RevisionDate], [b].[RevisionName], [b].[Side], [b].[SourceListId], [b].[Trader]
+FROM [BidLists] AS [b]
+2024-11-18 11:36:46.882 +01:00 [INF] 3 Bids récupérés avec succès.
+2024-11-18 11:36:46.882 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[P7CreateRestApi.Domain.BidList, P7CreateRestApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 11:36:46.903 +01:00 [INF] Executed action P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi) in 95.4642ms
+2024-11-18 11:36:46.903 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi)'
+2024-11-18 11:36:46.904 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 200 null application/json; charset=utf-8 119.1872ms
+2024-11-18 11:37:07.277 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-11-18 11:37:07.286 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi)'
+2024-11-18 11:37:07.286 +01:00 [INF] Route matched with {action = "GetAllBids", controller = "BidList"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllBids() on controller P7CreateRestApi.Controllers.BidListController (P7CreateRestApi).
+2024-11-18 11:37:07.287 +01:00 [INF] Tentative de récupération de tous les Bids.
+2024-11-18 11:37:07.297 +01:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[BidListId], [b].[Account], [b].[Ask], [b].[AskQuantity], [b].[Benchmark], [b].[Bid], [b].[BidListDate], [b].[BidQuantity], [b].[BidSecurity], [b].[BidStatus], [b].[BidType], [b].[Book], [b].[Commentary], [b].[CreationDate], [b].[CreationName], [b].[DealName], [b].[DealType], [b].[RevisionDate], [b].[RevisionName], [b].[Side], [b].[SourceListId], [b].[Trader]
+FROM [BidLists] AS [b]
+2024-11-18 11:37:07.299 +01:00 [INF] 3 Bids récupérés avec succès.
+2024-11-18 11:37:07.299 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[P7CreateRestApi.Domain.BidList, P7CreateRestApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 11:37:07.299 +01:00 [INF] Executed action P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi) in 12.9676ms
+2024-11-18 11:37:07.299 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi)'
+2024-11-18 11:37:07.300 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 200 null application/json; charset=utf-8 22.7887ms
+2024-11-18 11:37:28.680 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/logout - null 0
+2024-11-18 11:37:28.682 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Logout (P7CreateRestApi)'
+2024-11-18 11:37:28.686 +01:00 [INF] Route matched with {action = "Logout", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Logout() on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-11-18 11:37:28.687 +01:00 [INF] Déconnexion de l'utilisateur.
+2024-11-18 11:37:28.689 +01:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2024-11-18 11:37:28.690 +01:00 [INF] AuthenticationScheme: Identity.External signed out.
+2024-11-18 11:37:28.690 +01:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2024-11-18 11:37:28.690 +01:00 [INF] Déconnexion réussie.
+2024-11-18 11:37:28.690 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-11-18 11:37:28.691 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Logout (P7CreateRestApi) in 4.7389ms
+2024-11-18 11:37:28.691 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Logout (P7CreateRestApi)'
+2024-11-18 11:37:28.691 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/logout - 200 null application/json; charset=utf-8 11.5186ms
+2024-11-18 11:37:33.376 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-11-18 11:37:33.378 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-11-18 11:37:33.383 +01:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2024-11-18 11:37:33.383 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 302 0 null 7.342ms
+2024-11-18 11:37:33.391 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/Account/Login?ReturnUrl=%2FBidList - null null
+2024-11-18 11:37:33.393 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/Account/Login?ReturnUrl=%2FBidList - 404 0 null 2.1092ms
+2024-11-18 11:37:33.394 +01:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7210/Account/Login, Response status code: 404
+2024-11-18 11:37:46.237 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-11-18 11:37:46.238 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-11-18 11:37:46.238 +01:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2024-11-18 11:37:46.238 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 302 0 null 1.6428ms
+2024-11-18 11:37:46.245 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/Account/Login?ReturnUrl=%2FBidList - null null
+2024-11-18 11:37:46.245 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/Account/Login?ReturnUrl=%2FBidList - 404 0 null 0.6675ms
+2024-11-18 11:37:46.245 +01:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7210/Account/Login, Response status code: 404

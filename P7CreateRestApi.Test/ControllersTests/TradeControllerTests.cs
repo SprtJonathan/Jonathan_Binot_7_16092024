@@ -1,84 +1,100 @@
-﻿using Moq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Moq;
 using P7CreateRestApi.Controllers;
 using P7CreateRestApi.Domain;
 using P7CreateRestApi.Repositories;
-using Microsoft.AspNetCore.Mvc;
+using Xunit;
 
-namespace P7CreateRestApi.Tests
+namespace P7CreateRestApi.Tests.ControllersTests
 {
     public class TradeControllerTests
     {
-        private readonly Mock<ITradeRepository> _tradeRepositoryMock;
-        private readonly Mock<ILogger<TradeController>> _loggerMock;
+        private readonly Mock<ITradeRepository> _mockTradeRepository;
+        private readonly Mock<ILogger<TradeController>> _mockLogger;
         private readonly TradeController _controller;
 
         public TradeControllerTests()
         {
-            _tradeRepositoryMock = new Mock<ITradeRepository>();
-            _loggerMock = new Mock<ILogger<TradeController>>();
-            _controller = new TradeController(_tradeRepositoryMock.Object, _loggerMock.Object);
+            _mockTradeRepository = new Mock<ITradeRepository>();
+            _mockLogger = new Mock<ILogger<TradeController>>();
+            _controller = new TradeController(_mockTradeRepository.Object, _mockLogger.Object);
         }
 
-        // Test pour GetAllTrades - Cas où des Trades existent
         [Fact]
-        public async Task GetAllTrades_ShouldReturnOk_WhenTradesExist()
+        public async Task GetAllTrades_ReturnsOkResult_WithTrades()
         {
             // Arrange
             var trades = new List<Trade>
             {
-                new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1" },
-                new Trade { TradeId = 2, Account = "Account2", AccountType = "Type2" }
+                new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1", BuyQuantity = 100, SellQuantity = 50, BuyPrice = 1000, SellPrice = 900, TradeDate = DateTime.Now, TradeSecurity = "Security1", TradeStatus = "Status1", Trader = "Trader1", Benchmark = "Benchmark1", Book = "Book1", CreationName = "CreationName1", CreationDate = DateTime.Now, RevisionName = "RevisionName1", RevisionDate = DateTime.Now, DealName = "DealName1", DealType = "DealType1", SourceListId = "SourceListId1", Side = "Side1" },
+                new Trade { TradeId = 2, Account = "Account2", AccountType = "Type2", BuyQuantity = 200, SellQuantity = 100, BuyPrice = 2000, SellPrice = 1800, TradeDate = DateTime.Now, TradeSecurity = "Security2", TradeStatus = "Status2", Trader = "Trader2", Benchmark = "Benchmark2", Book = "Book2", CreationName = "CreationName2", CreationDate = DateTime.Now, RevisionName = "RevisionName2", RevisionDate = DateTime.Now, DealName = "DealName2", DealType = "DealType2", SourceListId = "SourceListId2", Side = "Side2" }
             };
-            _tradeRepositoryMock.Setup(r => r.GetAllTradesAsync()).ReturnsAsync(trades);
+            _mockTradeRepository.Setup(repo => repo.GetAllTradesAsync()).ReturnsAsync(trades);
 
             // Act
             var result = await _controller.GetAllTrades();
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            var returnedTrades = Assert.IsType<List<Trade>>(actionResult.Value);
-            Assert.Equal(trades.Count, returnedTrades.Count);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<Trade>>(okResult.Value);
+            Assert.Equal(2, model.Count());
         }
 
-        // Test pour GetAllTrades - Cas où aucun Trade n'existe
         [Fact]
-        public async Task GetAllTrades_ShouldReturnOk_WhenNoTradesExist()
+        public async Task GetAllTrades_ReturnsOkResult_WithEmptyList()
         {
             // Arrange
-            _tradeRepositoryMock.Setup(r => r.GetAllTradesAsync()).ReturnsAsync(new List<Trade>());
+            _mockTradeRepository.Setup(repo => repo.GetAllTradesAsync()).ReturnsAsync(new List<Trade>());
 
             // Act
             var result = await _controller.GetAllTrades();
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            var returnedTrades = Assert.IsType<List<Trade>>(actionResult.Value);
-            Assert.Empty(returnedTrades);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<Trade>>(okResult.Value);
+            Assert.Empty(model);
         }
 
-        // Test pour GetTradeById - Cas de succès
         [Fact]
-        public async Task GetTradeById_ShouldReturnOk_WhenTradeExists()
+        public async Task GetAllTrades_ReturnsInternalServerError_OnException()
         {
             // Arrange
-            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1" };
-            _tradeRepositoryMock.Setup(r => r.GetTradeByIdAsync(1)).ReturnsAsync(trade);
+            _mockTradeRepository.Setup(repo => repo.GetAllTradesAsync()).Throws(new Exception());
+
+            // Act
+            var result = await _controller.GetAllTrades();
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetTradeById_ReturnsOkResult_WithTrade()
+        {
+            // Arrange
+            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1", BuyQuantity = 100, SellQuantity = 50, BuyPrice = 1000, SellPrice = 900, TradeDate = DateTime.Now, TradeSecurity = "Security1", TradeStatus = "Status1", Trader = "Trader1", Benchmark = "Benchmark1", Book = "Book1", CreationName = "CreationName1", CreationDate = DateTime.Now, RevisionName = "RevisionName1", RevisionDate = DateTime.Now, DealName = "DealName1", DealType = "DealType1", SourceListId = "SourceListId1", Side = "Side1" };
+            _mockTradeRepository.Setup(repo => repo.GetTradeByIdAsync(1)).ReturnsAsync(trade);
 
             // Act
             var result = await _controller.GetTradeById(1);
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(trade, actionResult.Value);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsType<Trade>(okResult.Value);
+            Assert.Equal(1, model.TradeId);
         }
 
-        // Test pour GetTradeById - Cas de Trade non trouvé
         [Fact]
-        public async Task GetTradeById_ShouldReturnNotFound_WhenTradeDoesNotExist()
+        public async Task GetTradeById_ReturnsNotFound_WhenTradeDoesNotExist()
         {
             // Arrange
-            _tradeRepositoryMock.Setup(r => r.GetTradeByIdAsync(1)).ReturnsAsync((Trade)null);
+            _mockTradeRepository.Setup(repo => repo.GetTradeByIdAsync(1)).ReturnsAsync((Trade)null);
 
             // Act
             var result = await _controller.GetTradeById(1);
@@ -87,65 +103,139 @@ namespace P7CreateRestApi.Tests
             Assert.IsType<NotFoundResult>(result);
         }
 
-        // Test pour CreateTrade - Cas de succès
         [Fact]
-        public async Task CreateTrade_ShouldReturnCreatedAtAction_WhenTradeIsValid()
+        public async Task GetTradeById_ReturnsInternalServerError_OnException()
         {
             // Arrange
-            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1" };
-            _tradeRepositoryMock.Setup(r => r.CreateTradeAsync(trade)).ReturnsAsync(trade);
+            _mockTradeRepository.Setup(repo => repo.GetTradeByIdAsync(1)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.GetTradeById(1);
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task CreateTrade_ReturnsCreatedAtActionResult_WithValidTrade()
+        {
+            // Arrange
+            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1", BuyQuantity = 100, SellQuantity = 50, BuyPrice = 1000, SellPrice = 900, TradeDate = DateTime.Now, TradeSecurity = "Security1", TradeStatus = "Status1", Trader = "Trader1", Benchmark = "Benchmark1", Book = "Book1", CreationName = "CreationName1", CreationDate = DateTime.Now, RevisionName = "RevisionName1", RevisionDate = DateTime.Now, DealName = "DealName1", DealType = "DealType1", SourceListId = "SourceListId1", Side = "Side1" };
+            _mockTradeRepository.Setup(repo => repo.CreateTradeAsync(trade)).ReturnsAsync(trade);
 
             // Act
             var result = await _controller.CreateTrade(trade);
 
             // Assert
-            var actionResult = Assert.IsType<CreatedAtActionResult>(result);
-            Assert.Equal("GetTradeById", actionResult.ActionName);
-            Assert.Equal(trade.TradeId, actionResult.RouteValues["id"]);
-            Assert.Equal(trade, actionResult.Value);
+            var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result);
+            var model = Assert.IsType<Trade>(createdAtActionResult.Value);
+            Assert.Equal(1, model.TradeId);
         }
 
-        // Test pour CreateTrade - Cas de données invalides
         [Fact]
-        public async Task CreateTrade_ShouldReturnBadRequest_WhenModelIsInvalid()
+        public async Task CreateTrade_ReturnsBadRequest_WithNullTrade()
+        {
+            // Act
+            var result = await _controller.CreateTrade(null);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("Objet Trade nul", badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task CreateTrade_ReturnsBadRequest_WithInvalidModelState()
         {
             // Arrange
-            var trade = new Trade();
-            _controller.ModelState.AddModelError("Account", "Account is required.");
+            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1", BuyQuantity = 100, SellQuantity = 50, BuyPrice = 1000, SellPrice = 900, TradeDate = DateTime.Now, TradeSecurity = "Security1", TradeStatus = "Status1", Trader = "Trader1", Benchmark = "Benchmark1", Book = "Book1", CreationName = "CreationName1", CreationDate = DateTime.Now, RevisionName = "RevisionName1", RevisionDate = DateTime.Now, DealName = "DealName1", DealType = "DealType1", SourceListId = "SourceListId1", Side = "Side1" };
+            _controller.ModelState.AddModelError("Account", "Required");
 
             // Act
             var result = await _controller.CreateTrade(trade);
 
             // Assert
-            var actionResult = Assert.IsType<BadRequestObjectResult>(result);
-            var modelState = Assert.IsType<SerializableError>(actionResult.Value);
-            Assert.True(modelState.ContainsKey("Account"));
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.IsType<SerializableError>(badRequestResult.Value);
         }
 
-        // Test pour UpdateTrade - Cas de succès
         [Fact]
-        public async Task UpdateTrade_ShouldReturnOk_WhenTradeExistsAndIsUpdated()
+        public async Task CreateTrade_ReturnsInternalServerError_OnException()
         {
             // Arrange
-            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1" };
-            _tradeRepositoryMock.Setup(r => r.GetTradeByIdAsync(1)).ReturnsAsync(trade);
-            _tradeRepositoryMock.Setup(r => r.UpdateTradeAsync(trade)).ReturnsAsync(trade);
+            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1", BuyQuantity = 100, SellQuantity = 50, BuyPrice = 1000, SellPrice = 900, TradeDate = DateTime.Now, TradeSecurity = "Security1", TradeStatus = "Status1", Trader = "Trader1", Benchmark = "Benchmark1", Book = "Book1", CreationName = "CreationName1", CreationDate = DateTime.Now, RevisionName = "RevisionName1", RevisionDate = DateTime.Now, DealName = "DealName1", DealType = "DealType1", SourceListId = "SourceListId1", Side = "Side1" };
+            _mockTradeRepository.Setup(repo => repo.CreateTradeAsync(trade)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.CreateTrade(trade);
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task UpdateTrade_ReturnsOkResult_WithValidTrade()
+        {
+            // Arrange
+            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1", BuyQuantity = 100, SellQuantity = 50, BuyPrice = 1000, SellPrice = 900, TradeDate = DateTime.Now, TradeSecurity = "Security1", TradeStatus = "Status1", Trader = "Trader1", Benchmark = "Benchmark1", Book = "Book1", CreationName = "CreationName1", CreationDate = DateTime.Now, RevisionName = "RevisionName1", RevisionDate = DateTime.Now, DealName = "DealName1", DealType = "DealType1", SourceListId = "SourceListId1", Side = "Side1" };
+            _mockTradeRepository.Setup(repo => repo.UpdateTradeAsync(trade)).ReturnsAsync(trade);
 
             // Act
             var result = await _controller.UpdateTrade(1, trade);
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(trade, actionResult.Value);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsType<Trade>(okResult.Value);
+            Assert.Equal(1, model.TradeId);
         }
 
-        // Test pour UpdateTrade - Cas de Trade non trouvé
         [Fact]
-        public async Task UpdateTrade_ShouldReturnNotFound_WhenTradeDoesNotExist()
+        public async Task UpdateTrade_ReturnsBadRequest_WithNullTrade()
+        {
+            // Act
+            var result = await _controller.UpdateTrade(1, null);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("Objet Trade nul ou ID de Trade invalide", badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task UpdateTrade_ReturnsBadRequest_WithIdMismatch()
         {
             // Arrange
-            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1" };
-            _tradeRepositoryMock.Setup(r => r.GetTradeByIdAsync(1)).ReturnsAsync((Trade)null);
+            var trade = new Trade { TradeId = 2, Account = "Account1", AccountType = "Type1", BuyQuantity = 100, SellQuantity = 50, BuyPrice = 1000, SellPrice = 900, TradeDate = DateTime.Now, TradeSecurity = "Security1", TradeStatus = "Status1", Trader = "Trader1", Benchmark = "Benchmark1", Book = "Book1", CreationName = "CreationName1", CreationDate = DateTime.Now, RevisionName = "RevisionName1", RevisionDate = DateTime.Now, DealName = "DealName1", DealType = "DealType1", SourceListId = "SourceListId1", Side = "Side1" };
+
+            // Act
+            var result = await _controller.UpdateTrade(1, trade);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("Objet Trade nul ou ID de Trade invalide", badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task UpdateTrade_ReturnsBadRequest_WithInvalidModelState()
+        {
+            // Arrange
+            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1", BuyQuantity = 100, SellQuantity = 50, BuyPrice = 1000, SellPrice = 900, TradeDate = DateTime.Now, TradeSecurity = "Security1", TradeStatus = "Status1", Trader = "Trader1", Benchmark = "Benchmark1", Book = "Book1", CreationName = "CreationName1", CreationDate = DateTime.Now, RevisionName = "RevisionName1", RevisionDate = DateTime.Now, DealName = "DealName1", DealType = "DealType1", SourceListId = "SourceListId1", Side = "Side1" };
+            _controller.ModelState.AddModelError("Account", "Required");
+
+            // Act
+            var result = await _controller.UpdateTrade(1, trade);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.IsType<SerializableError>(badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task UpdateTrade_ReturnsNotFound_WhenTradeDoesNotExist()
+        {
+            // Arrange
+            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1", BuyQuantity = 100, SellQuantity = 50, BuyPrice = 1000, SellPrice = 900, TradeDate = DateTime.Now, TradeSecurity = "Security1", TradeStatus = "Status1", Trader = "Trader1", Benchmark = "Benchmark1", Book = "Book1", CreationName = "CreationName1", CreationDate = DateTime.Now, RevisionName = "RevisionName1", RevisionDate = DateTime.Now, DealName = "DealName1", DealType = "DealType1", SourceListId = "SourceListId1", Side = "Side1" };
+            _mockTradeRepository.Setup(repo => repo.UpdateTradeAsync(trade)).ReturnsAsync((Trade)null);
 
             // Act
             var result = await _controller.UpdateTrade(1, trade);
@@ -154,12 +244,26 @@ namespace P7CreateRestApi.Tests
             Assert.IsType<NotFoundResult>(result);
         }
 
-        // Test pour DeleteTrade - Cas de succès
         [Fact]
-        public async Task DeleteTrade_ShouldReturnNoContent_WhenTradeExists()
+        public async Task UpdateTrade_ReturnsInternalServerError_OnException()
         {
             // Arrange
-            _tradeRepositoryMock.Setup(r => r.DeleteTradeAsync(1)).ReturnsAsync(true);
+            var trade = new Trade { TradeId = 1, Account = "Account1", AccountType = "Type1", BuyQuantity = 100, SellQuantity = 50, BuyPrice = 1000, SellPrice = 900, TradeDate = DateTime.Now, TradeSecurity = "Security1", TradeStatus = "Status1", Trader = "Trader1", Benchmark = "Benchmark1", Book = "Book1", CreationName = "CreationName1", CreationDate = DateTime.Now, RevisionName = "RevisionName1", RevisionDate = DateTime.Now, DealName = "DealName1", DealType = "DealType1", SourceListId = "SourceListId1", Side = "Side1" };
+            _mockTradeRepository.Setup(repo => repo.UpdateTradeAsync(trade)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.UpdateTrade(1, trade);
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteTrade_ReturnsNoContent_WithValidId()
+        {
+            // Arrange
+            _mockTradeRepository.Setup(repo => repo.DeleteTradeAsync(1)).ReturnsAsync(true);
 
             // Act
             var result = await _controller.DeleteTrade(1);
@@ -168,18 +272,31 @@ namespace P7CreateRestApi.Tests
             Assert.IsType<NoContentResult>(result);
         }
 
-        // Test pour DeleteTrade - Cas de Trade non trouvé
         [Fact]
-        public async Task DeleteTrade_ShouldReturnNotFound_WhenTradeDoesNotExist()
+        public async Task DeleteTrade_ReturnsNotFound_WhenTradeDoesNotExist()
         {
             // Arrange
-            _tradeRepositoryMock.Setup(r => r.DeleteTradeAsync(1)).ReturnsAsync(false);
+            _mockTradeRepository.Setup(repo => repo.DeleteTradeAsync(1)).ReturnsAsync(false);
 
             // Act
             var result = await _controller.DeleteTrade(1);
 
             // Assert
             Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async Task DeleteTrade_ReturnsInternalServerError_OnException()
+        {
+            // Arrange
+            _mockTradeRepository.Setup(repo => repo.DeleteTradeAsync(1)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.DeleteTrade(1);
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
         }
     }
 }

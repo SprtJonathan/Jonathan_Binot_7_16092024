@@ -1,146 +1,100 @@
-using Moq;
+ï»¿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Moq;
 using P7CreateRestApi.Controllers;
 using P7CreateRestApi.Domain;
 using P7CreateRestApi.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+using Xunit;
 
-namespace P7CreateRestApi.Tests
+namespace P7CreateRestApi.Tests.ControllersTests
 {
     public class BidListControllerTests
     {
-        private readonly Mock<IBidRepository> _bidRepositoryMock;
-        private readonly Mock<ILogger<BidListController>> _loggerMock;
+        private readonly Mock<IBidRepository> _mockBidRepository;
+        private readonly Mock<ILogger<BidListController>> _mockLogger;
         private readonly BidListController _controller;
 
         public BidListControllerTests()
         {
-            _bidRepositoryMock = new Mock<IBidRepository>();
-            _loggerMock = new Mock<ILogger<BidListController>>();
-            _controller = new BidListController(_bidRepositoryMock.Object, _loggerMock.Object);
-
-            // Simuler un utilisateur authentifié
-            _controller.ControllerContext = new ControllerContext
-            {
-                HttpContext = new DefaultHttpContext()
-            };
-            _controller.ControllerContext.HttpContext.User = new System.Security.Claims.ClaimsPrincipal(
-                new System.Security.Claims.ClaimsIdentity(new[]
-                {
-                    new System.Security.Claims.Claim("id", "1")
-                })
-            );
+            _mockBidRepository = new Mock<IBidRepository>();
+            _mockLogger = new Mock<ILogger<BidListController>>();
+            _controller = new BidListController(_mockBidRepository.Object, _mockLogger.Object);
         }
 
-        // Test pour CreateBid - Cas de succès
         [Fact]
-        public async Task CreateBid_ShouldReturnCreatedAtActionResult_WhenBidIsValid()
-        {
-            // Arrange
-            var bid = new BidList { BidListId = 1, Account = "Account1", BidType = "Type1" };
-            _bidRepositoryMock.Setup(r => r.CreateBidAsync(bid)).ReturnsAsync(bid);
-
-            // Act
-            var result = await _controller.CreateBid(bid);
-
-            // Assert
-            var actionResult = Assert.IsType<CreatedAtActionResult>(result);
-            Assert.Equal("GetBidById", actionResult.ActionName);
-            Assert.Equal(bid.BidListId, actionResult.RouteValues["id"]);
-            Assert.Equal(bid, actionResult.Value);
-        }
-
-        // Test pour CreateBid - Cas de l'objet null
-        [Fact]
-        public async Task CreateBid_ShouldReturnBadRequest_WhenBidIsNull()
-        {
-            // Act
-            var result = await _controller.CreateBid(null);
-
-            // Assert
-            var actionResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal("Objet Bid nul", actionResult.Value);
-        }
-
-        // Test pour CreateBid - Cas de validation invalide
-        [Fact]
-        public async Task CreateBid_ShouldReturnBadRequest_WhenBidIsInvalid()
-        {
-            // Arrange
-            var bid = new BidList();
-            _controller.ModelState.AddModelError("Account", "Account is required.");
-
-            // Act
-            var result = await _controller.CreateBid(bid);
-
-            // Assert
-            var actionResult = Assert.IsType<BadRequestObjectResult>(result);
-            var modelState = Assert.IsType<SerializableError>(actionResult.Value);
-            Assert.True(modelState.ContainsKey("Account"));
-            var errors = modelState["Account"] as string[];
-            Assert.Contains("Account is required.", errors);
-        }
-
-        // Test pour GetAllBids - Cas où des entités sont trouvées
-        [Fact]
-        public async Task GetAllBids_ShouldReturnOk_WhenBidsExist()
+        public async Task GetAllBids_ReturnsOkResult_WithBids()
         {
             // Arrange
             var bids = new List<BidList>
-            {
-                new BidList { BidListId = 1, Account = "Account1", BidType = "Type1" },
-                new BidList { BidListId = 2, Account = "Account2", BidType = "Type2" }
-            };
-            _bidRepositoryMock.Setup(r => r.GetAllBidsAsync()).ReturnsAsync(bids);
+        {
+            new BidList { BidListId = 1, Account = "Account1" },
+            new BidList { BidListId = 2, Account = "Account2" }
+        };
+            _mockBidRepository.Setup(repo => repo.GetAllBidsAsync()).ReturnsAsync(bids);
 
             // Act
             var result = await _controller.GetAllBids();
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            var returnedBids = Assert.IsType<List<BidList>>(actionResult.Value);
-            Assert.Equal(bids.Count, returnedBids.Count);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<BidList>>(okResult.Value);
+            Assert.Equal(2, model.Count());
         }
 
-        // Test pour GetAllBids - Cas où aucune entité n'est trouvée
         [Fact]
-        public async Task GetAllBids_ShouldReturnOkWithEmptyList_WhenNoBidsExist()
+        public async Task GetAllBids_ReturnsOkResult_WithEmptyList()
         {
             // Arrange
-            _bidRepositoryMock.Setup(r => r.GetAllBidsAsync()).ReturnsAsync(new List<BidList>());
+            _mockBidRepository.Setup(repo => repo.GetAllBidsAsync()).ReturnsAsync(new List<BidList>());
 
             // Act
             var result = await _controller.GetAllBids();
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            var returnedBids = Assert.IsType<List<BidList>>(actionResult.Value);
-            Assert.Empty(returnedBids);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<BidList>>(okResult.Value);
+            Assert.Empty(model);
         }
 
-        // Test pour GetBidById - Cas de succès
         [Fact]
-        public async Task GetBidById_ShouldReturnOkResult_WhenBidExists()
+        public async Task GetAllBids_ReturnsInternalServerError_OnException()
         {
             // Arrange
-            var bid = new BidList { BidListId = 1, Account = "Account1", BidType = "Type1" };
-            _bidRepositoryMock.Setup(r => r.GetBidByIdAsync(1)).ReturnsAsync(bid);
+            _mockBidRepository.Setup(repo => repo.GetAllBidsAsync()).Throws(new Exception());
+
+            // Act
+            var result = await _controller.GetAllBids();
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetBidById_ReturnsOkResult_WithBid()
+        {
+            // Arrange
+            var bid = new BidList { BidListId = 1, Account = "Account1" };
+            _mockBidRepository.Setup(repo => repo.GetBidByIdAsync(1)).ReturnsAsync(bid);
 
             // Act
             var result = await _controller.GetBidById(1);
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(bid, actionResult.Value);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsType<BidList>(okResult.Value);
+            Assert.Equal(1, model.BidListId);
         }
 
-        // Test pour GetBidById - Cas de l'objet non trouvé
         [Fact]
-        public async Task GetBidById_ShouldReturnNotFound_WhenBidDoesNotExist()
+        public async Task GetBidById_ReturnsNotFound_WhenBidDoesNotExist()
         {
             // Arrange
-            _bidRepositoryMock.Setup(r => r.GetBidByIdAsync(1)).ReturnsAsync((BidList)null);
+            _mockBidRepository.Setup(repo => repo.GetBidByIdAsync(1)).ReturnsAsync((BidList)null);
 
             // Act
             var result = await _controller.GetBidById(1);
@@ -149,50 +103,167 @@ namespace P7CreateRestApi.Tests
             Assert.IsType<NotFoundResult>(result);
         }
 
-        // Test pour UpdateBid - Cas de succès
         [Fact]
-        public async Task UpdateBid_ShouldReturnOkResult_WhenBidIsValid()
+        public async Task GetBidById_ReturnsInternalServerError_OnException()
         {
             // Arrange
-            var originalBid = new BidList { BidListId = 1, Account = "Account1", BidType = "Type1" };
-            var updatedBid = new BidList { BidListId = 1, Account = "AccountUpdated", BidType = "TypeUpdated" };
-
-            _bidRepositoryMock.Setup(r => r.GetBidByIdAsync(1)).ReturnsAsync(originalBid);
-            _bidRepositoryMock.Setup(r => r.UpdateBidAsync(updatedBid)).ReturnsAsync(updatedBid);
+            _mockBidRepository.Setup(repo => repo.GetBidByIdAsync(1)).Throws(new Exception());
 
             // Act
-            var result = await _controller.UpdateBid(1, updatedBid);
+            var result = await _controller.GetBidById(1);
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(updatedBid, actionResult.Value);
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
         }
 
-        // Test pour UpdateBid - Cas de validation invalide
         [Fact]
-        public async Task UpdateBid_ShouldReturnBadRequest_WhenBidIsInvalid()
+        public async Task CreateBid_ReturnsCreatedAtActionResult_WithValidBid()
         {
             // Arrange
-            var bid = new BidList { BidListId = 1 };
-            _controller.ModelState.AddModelError("Account", "Account is required.");
+            var bid = new BidList { BidListId = 1, Account = "Account1" };
+            _mockBidRepository.Setup(repo => repo.CreateBidAsync(bid)).ReturnsAsync(bid);
 
             // Act
-            var result = await _controller.UpdateBid(bid.BidListId, bid);
+            var result = await _controller.CreateBid(bid);
 
             // Assert
-            var actionResult = Assert.IsType<BadRequestObjectResult>(result);
-            var modelState = Assert.IsType<SerializableError>(actionResult.Value);
-            Assert.True(modelState.ContainsKey("Account"));
-            var errors = modelState["Account"] as string[];
-            Assert.Contains("Account is required.", errors);
+            var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result);
+            var model = Assert.IsType<BidList>(createdAtActionResult.Value);
+            Assert.Equal(1, model.BidListId);
         }
 
-        // Test pour DeleteBid - Cas de succès
         [Fact]
-        public async Task DeleteBid_ShouldReturnNoContent_WhenBidExists()
+        public async Task CreateBid_ReturnsBadRequest_WithNullBid()
+        {
+            // Act
+            var result = await _controller.CreateBid(null);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("Objet Bid nul", badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task CreateBid_ReturnsBadRequest_WithInvalidModelState()
         {
             // Arrange
-            _bidRepositoryMock.Setup(r => r.DeleteBidAsync(1)).ReturnsAsync(true);
+            var bid = new BidList { BidListId = 1, Account = "Account1" };
+            _controller.ModelState.AddModelError("Account", "Required");
+
+            // Act
+            var result = await _controller.CreateBid(bid);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.IsType<SerializableError>(badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task CreateBid_ReturnsInternalServerError_OnException()
+        {
+            // Arrange
+            var bid = new BidList { BidListId = 1, Account = "Account1" };
+            _mockBidRepository.Setup(repo => repo.CreateBidAsync(bid)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.CreateBid(bid);
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task UpdateBid_ReturnsOkResult_WithValidBid()
+        {
+            // Arrange
+            var bid = new BidList { BidListId = 1, Account = "Account1" };
+            _mockBidRepository.Setup(repo => repo.UpdateBidAsync(bid)).ReturnsAsync(bid);
+
+            // Act
+            var result = await _controller.UpdateBid(1, bid);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsType<BidList>(okResult.Value);
+            Assert.Equal(1, model.BidListId);
+        }
+
+        [Fact]
+        public async Task UpdateBid_ReturnsBadRequest_WithNullBid()
+        {
+            // Act
+            var result = await _controller.UpdateBid(1, null);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("Objet Bid nul ou ID de Bid invalide", badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task UpdateBid_ReturnsBadRequest_WithIdMismatch()
+        {
+            // Arrange
+            var bid = new BidList { BidListId = 2, Account = "Account1" };
+
+            // Act
+            var result = await _controller.UpdateBid(1, bid);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("Objet Bid nul ou ID de Bid invalide", badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task UpdateBid_ReturnsBadRequest_WithInvalidModelState()
+        {
+            // Arrange
+            var bid = new BidList { BidListId = 1, Account = "Account1" };
+            _controller.ModelState.AddModelError("Account", "Required");
+
+            // Act
+            var result = await _controller.UpdateBid(1, bid);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.IsType<SerializableError>(badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task UpdateBid_ReturnsNotFound_WhenBidDoesNotExist()
+        {
+            // Arrange
+            var bid = new BidList { BidListId = 1, Account = "Account1" };
+            _mockBidRepository.Setup(repo => repo.UpdateBidAsync(bid)).ReturnsAsync((BidList)null);
+
+            // Act
+            var result = await _controller.UpdateBid(1, bid);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async Task UpdateBid_ReturnsInternalServerError_OnException()
+        {
+            // Arrange
+            var bid = new BidList { BidListId = 1, Account = "Account1" };
+            _mockBidRepository.Setup(repo => repo.UpdateBidAsync(bid)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.UpdateBid(1, bid);
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteBid_ReturnsNoContent_WithValidId()
+        {
+            // Arrange
+            _mockBidRepository.Setup(repo => repo.DeleteBidAsync(1)).ReturnsAsync(true);
 
             // Act
             var result = await _controller.DeleteBid(1);
@@ -201,18 +272,31 @@ namespace P7CreateRestApi.Tests
             Assert.IsType<NoContentResult>(result);
         }
 
-        // Test pour DeleteBid - Cas de l'objet non trouvé
         [Fact]
-        public async Task DeleteBid_ShouldReturnNotFound_WhenBidDoesNotExist()
+        public async Task DeleteBid_ReturnsNotFound_WhenBidDoesNotExist()
         {
             // Arrange
-            _bidRepositoryMock.Setup(r => r.DeleteBidAsync(1)).ReturnsAsync(false);
+            _mockBidRepository.Setup(repo => repo.DeleteBidAsync(1)).ReturnsAsync(false);
 
             // Act
             var result = await _controller.DeleteBid(1);
 
             // Assert
             Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async Task DeleteBid_ReturnsInternalServerError_OnException()
+        {
+            // Arrange
+            _mockBidRepository.Setup(repo => repo.DeleteBidAsync(1)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.DeleteBid(1);
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
         }
     }
 }

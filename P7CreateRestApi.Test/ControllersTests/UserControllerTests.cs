@@ -1,4 +1,5 @@
 ﻿using Moq;
+using Xunit;
 using Microsoft.Extensions.Logging;
 using P7CreateRestApi.Controllers;
 using P7CreateRestApi.Domain;
@@ -6,8 +7,12 @@ using P7CreateRestApi.Models;
 using P7CreateRestApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace P7CreateRestApi.Tests
+namespace P7CreateRestApi.Tests.ControllersTests
 {
     public class UserControllerTests
     {

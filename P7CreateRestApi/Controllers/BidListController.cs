@@ -98,7 +98,7 @@ namespace P7CreateRestApi.Controllers
             try
             {
                 var createdBid = await _bidRepository.CreateBidAsync(bid);
-                _logger.LogInformation("Bid créé avec succès avec l'ID {BidListId}.", createdBid.BidListId);
+                _logger.LogInformation("Bid créé avec l'ID {BidListId}.", createdBid.BidListId);
                 return CreatedAtAction(nameof(GetBidById), new { id = createdBid.BidListId }, createdBid);
             }
             catch (Exception ex)
@@ -119,13 +119,13 @@ namespace P7CreateRestApi.Controllers
 
             if (bid == null || bid.BidListId != id)
             {
-                _logger.LogWarning("Objet Bid nul ou incompatibilité d'ID pour la mise à jour du Bid avec ID {BidListId}.", id);
-                return BadRequest("Objet Bid nul ou incompatibilité d'ID");
+                _logger.LogWarning("Objet Bid nul ou ID de Bid invalide pour la mise à jour du Bid. Bid.Id : {BidListId}.", id);
+                return BadRequest("Objet Bid nul ou ID de Bid invalide");
             }
 
             if (!ModelState.IsValid)
             {
-                _logger.LogWarning("ModelState non valide pour la mise à jour du Bid avec ID {BidListId}.", id);
+                _logger.LogWarning("ModelState non valide pour la mise à jour du Bid avec l'ID {BidListId}.", id);
                 return BadRequest(ModelState);
             }
 

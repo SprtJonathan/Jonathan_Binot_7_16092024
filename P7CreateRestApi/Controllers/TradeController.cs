@@ -119,8 +119,8 @@ namespace P7CreateRestApi.Controllers
 
             if (trade == null || trade.TradeId != id)
             {
-                _logger.LogWarning("Objet Trade nul ou incompatibilité d'ID pour la mise à jour du Trade avec ID {TradeId}.", id);
-                return BadRequest("Objet Trade nul ou incompatibilité d'ID");
+                _logger.LogWarning("Objet Trade nul ou ID de Trade invalide pour la mise à jour du Trade. Trade.Id {TradeId}.", id);
+                return BadRequest("Objet Trade nul ou ID de Trade invalide");
             }
 
             if (!ModelState.IsValid)

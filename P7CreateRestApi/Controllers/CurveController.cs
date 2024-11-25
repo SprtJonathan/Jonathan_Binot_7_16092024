@@ -124,8 +124,8 @@ namespace P7CreateRestApi.Controllers
 
             if (curvePoint == null || curvePoint.Id != id)
             {
-                _logger.LogWarning("Objet CurvePoint nul ou incompatibilité d'ID pour la mise à jour du CurvePoint avec ID {CurvePointId}.", id);
-                return BadRequest("Objet CurvePoint nul ou incompatibilité d'ID");
+                _logger.LogWarning("Objet CurvePoint nul ou ID de CurvePoint invalide pour la mise à jour du CurvePoint. CurvePoint.Id {CurvePointId}.", id);
+                return BadRequest("Objet CurvePoint nul ou ID de CurvePoint invalide");
             }
 
             if (!ModelState.IsValid)

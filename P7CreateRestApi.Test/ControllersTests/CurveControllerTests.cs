@@ -1,97 +1,100 @@
-﻿using Moq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Moq;
 using P7CreateRestApi.Controllers;
 using P7CreateRestApi.Domain;
 using P7CreateRestApi.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+using Xunit;
 
-namespace P7CreateRestApi.Tests
+namespace P7CreateRestApi.Tests.ControllersTests
 {
     public class CurveControllerTests
     {
-        private readonly Mock<ICurvePointRepository> _curvePointRepositoryMock;
-        private readonly Mock<ILogger<CurveController>> _loggerMock;
+        private readonly Mock<ICurvePointRepository> _mockCurvePointRepository;
+        private readonly Mock<ILogger<CurveController>> _mockLogger;
         private readonly CurveController _controller;
 
         public CurveControllerTests()
         {
-            _curvePointRepositoryMock = new Mock<ICurvePointRepository>();
-            _loggerMock = new Mock<ILogger<CurveController>>();
-            _controller = new CurveController(_curvePointRepositoryMock.Object, _loggerMock.Object);
-
-            // Simuler un utilisateur authentifié
-            _controller.ControllerContext = new ControllerContext
-            {
-                HttpContext = new DefaultHttpContext()
-            };
-            _controller.ControllerContext.HttpContext.User = new System.Security.Claims.ClaimsPrincipal(
-                new System.Security.Claims.ClaimsIdentity(new[]
-                {
-                    new System.Security.Claims.Claim("id", "1")
-                })
-            );
+            _mockCurvePointRepository = new Mock<ICurvePointRepository>();
+            _mockLogger = new Mock<ILogger<CurveController>>();
+            _controller = new CurveController(_mockCurvePointRepository.Object, _mockLogger.Object);
         }
 
-        // Test pour GetAllCurvePoints - Cas où des entités sont trouvées
         [Fact]
-        public async Task GetAllCurvePoints_ShouldReturnOk_WhenCurvePointsExist()
+        public async Task GetAllCurvePoints_ReturnsOkResult_WithCurvePoints()
         {
             // Arrange
             var curvePoints = new List<CurvePoint>
             {
-                new CurvePoint { Id = 1, Term = 1.5 },
-                new CurvePoint { Id = 2, Term = 2.0 }
+                new CurvePoint { Id = 1, CurveId = 10 },
+                new CurvePoint { Id = 2, CurveId = 20 }
             };
-            _curvePointRepositoryMock.Setup(r => r.GetAllCurvePointsAsync()).ReturnsAsync(curvePoints);
+            _mockCurvePointRepository.Setup(repo => repo.GetAllCurvePointsAsync()).ReturnsAsync(curvePoints);
 
             // Act
             var result = await _controller.GetAllCurvePoints();
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            var returnedCurvePoints = Assert.IsType<List<CurvePoint>>(actionResult.Value);
-            Assert.Equal(curvePoints.Count, returnedCurvePoints.Count);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<CurvePoint>>(okResult.Value);
+            Assert.Equal(2, model.Count());
         }
 
-        // Test pour GetAllCurvePoints - Cas où aucune entité n'est trouvée
         [Fact]
-        public async Task GetAllCurvePoints_ShouldReturnOkWithEmptyList_WhenNoCurvePointsExist()
+        public async Task GetAllCurvePoints_ReturnsOkResult_WithEmptyList()
         {
             // Arrange
-            _curvePointRepositoryMock.Setup(r => r.GetAllCurvePointsAsync()).ReturnsAsync(new List<CurvePoint>());
+            _mockCurvePointRepository.Setup(repo => repo.GetAllCurvePointsAsync()).ReturnsAsync(new List<CurvePoint>());
 
             // Act
             var result = await _controller.GetAllCurvePoints();
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            var returnedCurvePoints = Assert.IsType<List<CurvePoint>>(actionResult.Value);
-            Assert.Empty(returnedCurvePoints);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<CurvePoint>>(okResult.Value);
+            Assert.Empty(model);
         }
 
-        // Test pour GetCurvePointById - Cas de succès
         [Fact]
-        public async Task GetCurvePointById_ShouldReturnOkResult_WhenCurvePointExists()
+        public async Task GetAllCurvePoints_ReturnsInternalServerError_OnException()
         {
             // Arrange
-            var curvePoint = new CurvePoint { Id = 1, Term = 1.5 };
-            _curvePointRepositoryMock.Setup(r => r.GetCurvePointByIdAsync(1)).ReturnsAsync(curvePoint);
+            _mockCurvePointRepository.Setup(repo => repo.GetAllCurvePointsAsync()).Throws(new Exception());
+
+            // Act
+            var result = await _controller.GetAllCurvePoints();
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetCurvePointById_ReturnsOkResult_WithCurvePoint()
+        {
+            // Arrange
+            var curvePoint = new CurvePoint { Id = 1, CurveId = 10 };
+            _mockCurvePointRepository.Setup(repo => repo.GetCurvePointByIdAsync(1)).ReturnsAsync(curvePoint);
 
             // Act
             var result = await _controller.GetCurvePointById(1);
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(curvePoint, actionResult.Value);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsType<CurvePoint>(okResult.Value);
+            Assert.Equal(1, model.Id);
         }
 
-        // Test pour GetCurvePointById - Cas de l'objet non trouvé
         [Fact]
-        public async Task GetCurvePointById_ShouldReturnNotFound_WhenCurvePointDoesNotExist()
+        public async Task GetCurvePointById_ReturnsNotFound_WhenCurvePointDoesNotExist()
         {
             // Arrange
-            _curvePointRepositoryMock.Setup(r => r.GetCurvePointByIdAsync(1)).ReturnsAsync((CurvePoint)null);
+            _mockCurvePointRepository.Setup(repo => repo.GetCurvePointByIdAsync(1)).ReturnsAsync((CurvePoint)null);
 
             // Act
             var result = await _controller.GetCurvePointById(1);
@@ -100,80 +103,167 @@ namespace P7CreateRestApi.Tests
             Assert.IsType<NotFoundResult>(result);
         }
 
-        // Test pour CreateCurvePoint - Cas de succès
         [Fact]
-        public async Task CreateCurvePoint_ShouldReturnCreatedAtActionResult_WhenCurvePointIsValid()
+        public async Task GetCurvePointById_ReturnsInternalServerError_OnException()
         {
             // Arrange
-            var curvePoint = new CurvePoint { Id = 1, Term = 1.5 };
-            _curvePointRepositoryMock.Setup(r => r.CreateCurvePointAsync(curvePoint)).ReturnsAsync(curvePoint);
+            _mockCurvePointRepository.Setup(repo => repo.GetCurvePointByIdAsync(1)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.GetCurvePointById(1);
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task CreateCurvePoint_ReturnsCreatedAtActionResult_WithValidCurvePoint()
+        {
+            // Arrange
+            var curvePoint = new CurvePoint { Id = 1, CurveId = 10 };
+            _mockCurvePointRepository.Setup(repo => repo.CreateCurvePointAsync(curvePoint)).ReturnsAsync(curvePoint);
 
             // Act
             var result = await _controller.CreateCurvePoint(curvePoint);
 
             // Assert
-            var actionResult = Assert.IsType<CreatedAtActionResult>(result);
-            Assert.Equal("GetCurvePointById", actionResult.ActionName);
-            Assert.Equal(curvePoint.Id, actionResult.RouteValues["id"]);
-            Assert.Equal(curvePoint, actionResult.Value);
+            var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result);
+            var model = Assert.IsType<CurvePoint>(createdAtActionResult.Value);
+            Assert.Equal(1, model.Id);
         }
 
-        // Test pour CreateCurvePoint - Cas de l'objet null
         [Fact]
-        public async Task CreateCurvePoint_ShouldReturnBadRequest_WhenCurvePointIsNull()
+        public async Task CreateCurvePoint_ReturnsBadRequest_WithNullCurvePoint()
         {
             // Act
             var result = await _controller.CreateCurvePoint(null);
 
             // Assert
-            var actionResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal("Objet CurvePoint nul", actionResult.Value);
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("Objet CurvePoint nul", badRequestResult.Value);
         }
 
-        // Test pour UpdateCurvePoint - Cas de succès
         [Fact]
-        public async Task UpdateCurvePoint_ShouldReturnOkResult_WhenCurvePointIsValid()
+        public async Task CreateCurvePoint_ReturnsBadRequest_WithInvalidModelState()
         {
             // Arrange
-            var originalCurvePoint = new CurvePoint { Id = 1, Term = 1.5 };
-            var updatedCurvePoint = new CurvePoint { Id = 1, Term = 2.0 };
-
-            _curvePointRepositoryMock.Setup(r => r.GetCurvePointByIdAsync(1)).ReturnsAsync(originalCurvePoint);
-            _curvePointRepositoryMock.Setup(r => r.UpdateCurvePointAsync(updatedCurvePoint)).ReturnsAsync(updatedCurvePoint);
+            var curvePoint = new CurvePoint { Id = 1, CurveId = 10 };
+            _controller.ModelState.AddModelError("CurveId", "Required");
 
             // Act
-            var result = await _controller.UpdateCurvePoint(1, updatedCurvePoint);
+            var result = await _controller.CreateCurvePoint(curvePoint);
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(updatedCurvePoint, actionResult.Value);
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.IsType<SerializableError>(badRequestResult.Value);
         }
 
-        // Test pour UpdateCurvePoint - Cas de validation invalide
         [Fact]
-        public async Task UpdateCurvePoint_ShouldReturnBadRequest_WhenCurvePointIsInvalid()
+        public async Task CreateCurvePoint_ReturnsInternalServerError_OnException()
         {
             // Arrange
-            var curvePoint = new CurvePoint { Id = 1 };
-            _controller.ModelState.AddModelError("Term", "Term is required.");
+            var curvePoint = new CurvePoint { Id = 1, CurveId = 10 };
+            _mockCurvePointRepository.Setup(repo => repo.CreateCurvePointAsync(curvePoint)).Throws(new Exception());
 
             // Act
-            var result = await _controller.UpdateCurvePoint(curvePoint.Id, curvePoint);
+            var result = await _controller.CreateCurvePoint(curvePoint);
 
             // Assert
-            var actionResult = Assert.IsType<BadRequestObjectResult>(result);
-            var modelState = Assert.IsType<SerializableError>(actionResult.Value);
-            Assert.True(modelState.ContainsKey("Term"));
-            var errors = modelState["Term"] as string[];
-            Assert.Contains("Term is required.", errors);
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
         }
 
-        // Test pour DeleteCurvePoint - Cas de succès
         [Fact]
-        public async Task DeleteCurvePoint_ShouldReturnNoContent_WhenCurvePointExists()
+        public async Task UpdateCurvePoint_ReturnsOkResult_WithValidCurvePoint()
         {
             // Arrange
-            _curvePointRepositoryMock.Setup(r => r.DeleteCurvePointAsync(1)).ReturnsAsync(true);
+            var curvePoint = new CurvePoint { Id = 1, CurveId = 10 };
+            _mockCurvePointRepository.Setup(repo => repo.UpdateCurvePointAsync(curvePoint)).ReturnsAsync(curvePoint);
+
+            // Act
+            var result = await _controller.UpdateCurvePoint(1, curvePoint);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var model = Assert.IsType<CurvePoint>(okResult.Value);
+            Assert.Equal(1, model.Id);
+        }
+
+        [Fact]
+        public async Task UpdateCurvePoint_ReturnsBadRequest_WithNullCurvePoint()
+        {
+            // Act
+            var result = await _controller.UpdateCurvePoint(1, null);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("Objet CurvePoint nul ou ID de CurvePoint invalide", badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task UpdateCurvePoint_ReturnsBadRequest_WithIdMismatch()
+        {
+            // Arrange
+            var curvePoint = new CurvePoint { Id = 2, CurveId = 10 };
+
+            // Act
+            var result = await _controller.UpdateCurvePoint(1, curvePoint);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("Objet CurvePoint nul ou ID de CurvePoint invalide", badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task UpdateCurvePoint_ReturnsBadRequest_WithInvalidModelState()
+        {
+            // Arrange
+            var curvePoint = new CurvePoint { Id = 1, CurveId = 10 };
+            _controller.ModelState.AddModelError("CurveId", "Required");
+
+            // Act
+            var result = await _controller.UpdateCurvePoint(1, curvePoint);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.IsType<SerializableError>(badRequestResult.Value);
+        }
+
+        [Fact]
+        public async Task UpdateCurvePoint_ReturnsNotFound_WhenCurvePointDoesNotExist()
+        {
+            // Arrange
+            var curvePoint = new CurvePoint { Id = 1, CurveId = 10 };
+            _mockCurvePointRepository.Setup(repo => repo.UpdateCurvePointAsync(curvePoint)).ReturnsAsync((CurvePoint)null);
+
+            // Act
+            var result = await _controller.UpdateCurvePoint(1, curvePoint);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async Task UpdateCurvePoint_ReturnsInternalServerError_OnException()
+        {
+            // Arrange
+            var curvePoint = new CurvePoint { Id = 1, CurveId = 10 };
+            _mockCurvePointRepository.Setup(repo => repo.UpdateCurvePointAsync(curvePoint)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.UpdateCurvePoint(1, curvePoint);
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteCurvePoint_ReturnsNoContent_WithValidId()
+        {
+            // Arrange
+            _mockCurvePointRepository.Setup(repo => repo.DeleteCurvePointAsync(1)).ReturnsAsync(true);
 
             // Act
             var result = await _controller.DeleteCurvePoint(1);
@@ -182,18 +272,31 @@ namespace P7CreateRestApi.Tests
             Assert.IsType<NoContentResult>(result);
         }
 
-        // Test pour DeleteCurvePoint - Cas de l'objet non trouvé
         [Fact]
-        public async Task DeleteCurvePoint_ShouldReturnNotFound_WhenCurvePointDoesNotExist()
+        public async Task DeleteCurvePoint_ReturnsNotFound_WhenCurvePointDoesNotExist()
         {
             // Arrange
-            _curvePointRepositoryMock.Setup(r => r.DeleteCurvePointAsync(1)).ReturnsAsync(false);
+            _mockCurvePointRepository.Setup(repo => repo.DeleteCurvePointAsync(1)).ReturnsAsync(false);
 
             // Act
             var result = await _controller.DeleteCurvePoint(1);
 
             // Assert
             Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async Task DeleteCurvePoint_ReturnsInternalServerError_OnException()
+        {
+            // Arrange
+            _mockCurvePointRepository.Setup(repo => repo.DeleteCurvePointAsync(1)).Throws(new Exception());
+
+            // Act
+            var result = await _controller.DeleteCurvePoint(1);
+
+            // Assert
+            var statusResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusResult.StatusCode);
         }
     }
 }

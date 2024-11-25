@@ -29,7 +29,6 @@ namespace P7CreateRestApi.Controllers
         {
             _logger.LogInformation("Tentative de connexion pour l'utilisateur {UserName}.", model.UserName);
 
-            // Tentative de connexion de l'utilisateur
             var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: true);
 
             if (result.Succeeded)
@@ -40,16 +39,17 @@ namespace P7CreateRestApi.Controllers
                 var token = await _jwtService.GenerateToken(user);
 
                 _logger.LogInformation("Token JWT généré avec succès pour l'utilisateur {UserName}.", model.UserName);
-                return Ok(new { Message = "Connexion réussie.", Token = token });
+                return Ok(new ApiResponse { Message = "Connexion réussie.", Token = token });
             }
-            else if (result.IsLockedOut)
+
+            if (result.IsLockedOut)
             {
-                _logger.LogWarning("L'utilisateur {UserName} est verrouillé en raison de tentatives de connexion infructueuses.", model.UserName);
-                return Unauthorized(new { Message = "Compte verrouillé en raison de tentatives de connexion infructueuses." });
+                _logger.LogWarning("L'utilisateur {UserName} est verrouillé.", model.UserName);
+                return Unauthorized(new ApiResponse { Message = "Compte verrouillé en raison de tentatives de connexion infructueuses." });
             }
 
             _logger.LogWarning("Tentative de connexion non valide pour l'utilisateur {UserName}.", model.UserName);
-            return Unauthorized(new { Message = "Tentative de connexion non valide." });
+            return Unauthorized(new ApiResponse { Message = "Nom d'utilisateur ou mot de passe incorrect." });
         }
 
         // POST api/logout
@@ -57,11 +57,9 @@ namespace P7CreateRestApi.Controllers
         public async Task<IActionResult> Logout()
         {
             _logger.LogInformation("Déconnexion de l'utilisateur.");
-
             await _signInManager.SignOutAsync();
-
             _logger.LogInformation("Déconnexion réussie.");
-            return Ok(new { Message = "Déconnexion réussie." });
+            return Ok(new ApiResponse { Message = "Déconnexion réussie." });
         }
     }
 }

@@ -119,8 +119,8 @@ namespace P7CreateRestApi.Controllers
 
             if (ruleName == null || ruleName.Id != id)
             {
-                _logger.LogWarning("Objet RuleName nul ou incompatibilité d'ID pour la mise à jour du RuleName avec ID {RuleNameId}.", id);
-                return BadRequest("Objet RuleName nul ou incompatibilité d'ID");
+                _logger.LogWarning("Objet RuleName nul ou ID de RuleName invalide pour la mise à jour du RuleName. RuleName.Id {RuleNameId}.", id);
+                return BadRequest("Objet RuleName nul ou ID de RuleName invalide");
             }
 
             if (!ModelState.IsValid)

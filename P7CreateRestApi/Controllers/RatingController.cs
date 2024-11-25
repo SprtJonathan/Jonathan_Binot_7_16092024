@@ -124,8 +124,8 @@ namespace P7CreateRestApi.Controllers
 
             if (rating == null || rating.Id != id)
             {
-                _logger.LogWarning("Objet Rating nul ou incompatibilité d'ID pour la mise à jour du Rating avec ID {RatingId}.", id);
-                return BadRequest("Objet Rating nul ou incompatibilité d'ID");
+                _logger.LogWarning("Objet Rating nul ou ID de Rating invalide pour la mise à jour du Rating. Rating.Id {RatingId}.", id);
+                return BadRequest("Objet Rating nul ou ID de Rating invalide");
             }
 
             if (!ModelState.IsValid)
