@@ -1,0 +1,891 @@
+2024-12-02 10:01:31.420 +01:00 [INF] Démarrage de l'application
+2024-12-02 10:01:31.475 +01:00 [INF] User profile is available. Using 'C:\Users\sprtj\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-12-02 10:01:31.617 +01:00 [INF] Now listening on: https://localhost:7210
+2024-12-02 10:01:31.617 +01:00 [INF] Now listening on: http://localhost:5267
+2024-12-02 10:01:31.646 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-02 10:01:31.646 +01:00 [INF] Hosting environment: Development
+2024-12-02 10:01:31.646 +01:00 [INF] Content root path: C:\Users\sprtj\Documents\GitHub\P7_Binot_Jonathan\P7CreateRestApi
+2024-12-02 10:01:31.947 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-12-02 10:01:32.060 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 116.0924ms
+2024-12-02 10:01:32.096 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.css - null null
+2024-12-02 10:01:32.096 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-12-02 10:01:32.096 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-02 10:01:32.098 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 2.513ms
+2024-12-02 10:01:32.102 +01:00 [INF] The file /index.css was not modified
+2024-12-02 10:01:32.103 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.css - 304 null text/css 7.2614ms
+2024-12-02 10:01:32.112 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 16.4882ms
+2024-12-02 10:01:35.178 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-12-02 10:01:35.204 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 26.0984ms
+2024-12-02 10:01:35.303 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-12-02 10:01:35.392 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 88.9998ms
+2024-12-02 10:01:49.576 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/login - application/json 80
+2024-12-02 10:01:49.652 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:01:49.675 +01:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(P7CreateRestApi.Models.LoginModel) on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-12-02 10:01:49.831 +01:00 [INF] Tentative de connexion pour l'utilisateur user.
+2024-12-02 10:01:51.160 +01:00 [INF] Executed DbCommand (52ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:01:51.381 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:01:51.405 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:01:51.415 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-12-02 10:01:51.431 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__role_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2024-12-02 10:01:51.445 +01:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2024-12-02 10:01:51.446 +01:00 [INF] Connexion réussie pour l'utilisateur user.
+2024-12-02 10:01:51.450 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:01:51.453 +01:00 [INF] Début de la génération du jeton JWT pour l'utilisateur user (ID: 2)
+2024-12-02 10:01:51.455 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:01:51.455 +01:00 [INF] Récupération des revendications pour l'utilisateur user. Total: 0
+2024-12-02 10:01:51.457 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:01:51.457 +01:00 [INF] Récupération des rôles pour l'utilisateur user. Total: 1
+2024-12-02 10:01:51.458 +01:00 [INF] Les revendications et les rôles ont été ajoutés aux claims du jeton pour l'utilisateur user.
+2024-12-02 10:04:08.554 +01:00 [INF] Clé de sécurité et informations d'identification de signature créées pour le jeton.
+2024-12-02 10:04:08.573 +01:00 [INF] Le jeton JWT a été généré avec succès pour l'utilisateur user.
+2024-12-02 10:04:08.589 +01:00 [INF] Token JWT généré avec succès pour l'utilisateur user.
+2024-12-02 10:04:08.598 +01:00 [INF] Executing OkObjectResult, writing value of type 'P7CreateRestApi.Models.ApiResponse'.
+2024-12-02 10:04:08.605 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi) in 138927.0024ms
+2024-12-02 10:04:08.605 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:04:08.611 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/login - 200 null application/json; charset=utf-8 139035.0906ms
+2024-12-02 10:04:15.879 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:04:15.888 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:04:15.891 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:04:15.891 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:04:15.891 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 12.2084ms
+2024-12-02 10:04:19.789 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:04:19.790 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:04:19.791 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:04:19.791 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:04:19.791 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 2.9584ms
+2024-12-02 10:04:21.856 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:04:21.858 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:04:21.858 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:04:21.858 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:04:21.858 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 2.3434ms
+2024-12-02 10:04:21.976 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:04:21.976 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:04:21.976 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:04:21.976 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:04:21.976 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 1.1171ms
+2024-12-02 10:04:22.270 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:04:22.270 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:04:22.271 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:04:22.271 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:04:22.271 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.6739ms
+2024-12-02 10:04:22.400 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:04:22.401 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:04:22.401 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:04:22.401 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:04:22.401 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 1.1642ms
+2024-12-02 10:09:37.417 +01:00 [INF] Démarrage de l'application
+2024-12-02 10:09:37.468 +01:00 [INF] User profile is available. Using 'C:\Users\sprtj\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-12-02 10:09:37.589 +01:00 [INF] Now listening on: https://localhost:7210
+2024-12-02 10:09:37.589 +01:00 [INF] Now listening on: http://localhost:5267
+2024-12-02 10:09:37.613 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-02 10:09:37.613 +01:00 [INF] Hosting environment: Development
+2024-12-02 10:09:37.613 +01:00 [INF] Content root path: C:\Users\sprtj\Documents\GitHub\P7_Binot_Jonathan\P7CreateRestApi
+2024-12-02 10:09:38.075 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-12-02 10:09:38.189 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 117.3394ms
+2024-12-02 10:09:38.223 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-12-02 10:09:38.223 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-02 10:09:38.225 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 2.8457ms
+2024-12-02 10:09:38.232 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 9.7047ms
+2024-12-02 10:09:38.257 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-12-02 10:09:38.288 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 31.627ms
+2024-12-02 10:09:38.393 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-12-02 10:09:38.474 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 81.1894ms
+2024-12-02 10:09:55.001 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/login - application/json 80
+2024-12-02 10:09:55.072 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:09:55.091 +01:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(P7CreateRestApi.Models.LoginModel) on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-12-02 10:09:55.233 +01:00 [INF] Tentative de connexion pour l'utilisateur user.
+2024-12-02 10:09:56.542 +01:00 [INF] Executed DbCommand (47ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:09:56.736 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:09:56.758 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:09:56.766 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-12-02 10:09:56.784 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__role_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2024-12-02 10:09:56.798 +01:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2024-12-02 10:09:56.800 +01:00 [INF] Connexion réussie pour l'utilisateur user.
+2024-12-02 10:09:56.804 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:09:56.807 +01:00 [INF] Début de la génération du jeton JWT pour l'utilisateur user (ID: 2)
+2024-12-02 10:09:56.808 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:09:56.809 +01:00 [INF] Récupération des revendications pour l'utilisateur user. Total: 0
+2024-12-02 10:09:56.811 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:09:56.811 +01:00 [INF] Récupération des rôles pour l'utilisateur user. Total: 1
+2024-12-02 10:09:56.812 +01:00 [INF] Les revendications et les rôles ont été ajoutés aux claims du jeton pour l'utilisateur user.
+2024-12-02 10:09:56.812 +01:00 [INF] Clé de sécurité et informations d'identification de signature créées pour le jeton.
+2024-12-02 10:09:56.815 +01:00 [INF] Le jeton JWT a été généré avec succès pour l'utilisateur user.
+2024-12-02 10:09:56.833 +01:00 [INF] Token JWT généré avec succès pour l'utilisateur user.
+2024-12-02 10:09:56.839 +01:00 [INF] Executing OkObjectResult, writing value of type 'P7CreateRestApi.Models.ApiResponse'.
+2024-12-02 10:09:56.845 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi) in 1750.9628ms
+2024-12-02 10:09:56.846 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:09:56.852 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/login - 200 null application/json; charset=utf-8 1851.0771ms
+2024-12-02 10:10:04.216 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:10:04.225 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:10:04.228 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:10:04.228 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:10:04.228 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 13.1466ms
+2024-12-02 10:10:09.528 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:10:09.530 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:10:09.530 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:10:09.530 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:10:09.530 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 3.0155ms
+2024-12-02 10:10:10.257 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:10:10.258 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:10:10.258 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:10:10.258 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:10:10.259 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 2.0722ms
+2024-12-02 10:10:10.911 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:10:10.912 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:10:10.912 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:10:10.912 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:10:10.912 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 1.1747ms
+2024-12-02 10:10:11.018 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:10:11.019 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:10:11.019 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:10:11.019 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:10:11.019 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.8809ms
+2024-12-02 10:10:11.130 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:10:11.130 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:10:11.130 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:10:11.130 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:10:11.130 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 1.1553ms
+2024-12-02 10:10:11.249 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:10:11.250 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:10:11.250 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:10:11.250 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:10:11.250 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 1.0467ms
+2024-12-02 10:10:11.346 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:10:11.346 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:10:11.346 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:10:11.346 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:10:11.346 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.5748ms
+2024-12-02 10:10:11.450 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:10:11.450 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:10:11.450 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:10:11.450 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:10:11.450 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.8684ms
+2024-12-02 10:10:17.471 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:10:17.471 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:10:17.471 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:10:17.471 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:10:17.471 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.9346ms
+2024-12-02 10:22:44.612 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:22:44.645 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:22:44.646 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:22:44.646 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:22:44.646 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 35.1634ms
+2024-12-02 10:24:54.004 +01:00 [INF] Démarrage de l'application
+2024-12-02 10:24:54.057 +01:00 [INF] User profile is available. Using 'C:\Users\sprtj\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-12-02 10:24:54.222 +01:00 [INF] Now listening on: https://localhost:7210
+2024-12-02 10:24:54.222 +01:00 [INF] Now listening on: http://localhost:5267
+2024-12-02 10:24:54.250 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-02 10:24:54.250 +01:00 [INF] Hosting environment: Development
+2024-12-02 10:24:54.250 +01:00 [INF] Content root path: C:\Users\sprtj\Documents\GitHub\P7_Binot_Jonathan\P7CreateRestApi
+2024-12-02 10:24:54.509 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-12-02 10:24:54.629 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 123.8806ms
+2024-12-02 10:24:54.667 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-02 10:24:54.667 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-12-02 10:24:54.670 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 2.7327ms
+2024-12-02 10:24:54.677 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 10.4574ms
+2024-12-02 10:24:54.714 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-12-02 10:24:54.755 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 42.1101ms
+2024-12-02 10:24:54.799 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-12-02 10:24:54.902 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 103.2802ms
+2024-12-02 10:25:00.748 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:00.822 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:00.827 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:00.827 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:00.828 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 79.6649ms
+2024-12-02 10:25:16.495 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/login - application/json 80
+2024-12-02 10:25:16.500 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:25:16.524 +01:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(P7CreateRestApi.Models.LoginModel) on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-12-02 10:25:16.681 +01:00 [INF] Tentative de connexion pour l'utilisateur user.
+2024-12-02 10:25:18.129 +01:00 [INF] Executed DbCommand (62ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:25:18.328 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:25:18.359 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:25:18.367 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-12-02 10:25:18.388 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__role_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2024-12-02 10:25:18.407 +01:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2024-12-02 10:25:18.409 +01:00 [INF] Connexion réussie pour l'utilisateur user.
+2024-12-02 10:25:18.414 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:25:18.416 +01:00 [INF] Début de la génération du jeton JWT pour l'utilisateur user (ID: 2)
+2024-12-02 10:25:18.419 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:25:18.419 +01:00 [INF] Récupération des revendications pour l'utilisateur user. Total: 0
+2024-12-02 10:25:18.422 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:25:18.422 +01:00 [INF] Récupération des rôles pour l'utilisateur user. Total: 1
+2024-12-02 10:25:18.422 +01:00 [INF] Les revendications et les rôles ont été ajoutés aux claims du jeton pour l'utilisateur user.
+2024-12-02 10:25:18.423 +01:00 [INF] Clé de sécurité et informations d'identification de signature créées pour le jeton.
+2024-12-02 10:25:18.427 +01:00 [INF] Le jeton JWT a été généré avec succès pour l'utilisateur user.
+2024-12-02 10:25:18.446 +01:00 [INF] Token JWT généré avec succès pour l'utilisateur user.
+2024-12-02 10:25:18.453 +01:00 [INF] Executing OkObjectResult, writing value of type 'P7CreateRestApi.Models.ApiResponse'.
+2024-12-02 10:25:18.460 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi) in 1931.4426ms
+2024-12-02 10:25:18.460 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:25:18.467 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/login - 200 null application/json; charset=utf-8 1972.6184ms
+2024-12-02 10:25:27.026 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:27.028 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:27.028 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:27.028 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:27.028 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 2.8684ms
+2024-12-02 10:25:28.791 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:28.792 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:28.793 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:28.793 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:28.793 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 1.6899ms
+2024-12-02 10:25:28.927 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:28.927 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:28.927 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:28.927 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:28.927 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 1.0212ms
+2024-12-02 10:25:29.042 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:29.042 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:29.042 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:29.042 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:29.042 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.8743ms
+2024-12-02 10:25:29.176 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:29.176 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:29.176 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:29.176 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:29.176 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.7307ms
+2024-12-02 10:25:29.293 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:29.293 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:29.293 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:29.293 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:29.293 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 1.0809ms
+2024-12-02 10:25:29.423 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:29.424 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:29.424 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:29.424 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:29.424 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.7841ms
+2024-12-02 10:25:29.539 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:29.539 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:29.540 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:29.540 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:29.540 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.8444ms
+2024-12-02 10:25:29.664 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:29.664 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:29.664 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:29.665 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:29.665 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.7809ms
+2024-12-02 10:25:29.775 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:29.775 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:29.775 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:29.775 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:29.775 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.7723ms
+2024-12-02 10:25:29.898 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:29.898 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:29.898 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:29.898 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:29.898 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.7516ms
+2024-12-02 10:25:30.005 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:30.005 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:30.005 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:30.005 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:30.005 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 1.1572ms
+2024-12-02 10:25:30.127 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:30.127 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:30.127 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:30.127 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:30.127 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.8718ms
+2024-12-02 10:25:30.239 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:30.239 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:30.239 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:30.239 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:30.239 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.6818ms
+2024-12-02 10:25:30.366 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:30.367 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:30.367 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:30.367 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:30.367 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.884ms
+2024-12-02 10:25:30.490 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:30.491 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:30.491 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:30.491 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:30.491 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.9675ms
+2024-12-02 10:25:30.620 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:25:30.621 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:25:30.621 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:25:30.621 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:25:30.621 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.7116ms
+2024-12-02 10:29:46.461 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-12-02 10:29:46.470 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 10.0108ms
+2024-12-02 10:29:46.551 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-12-02 10:29:46.552 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 0.9506ms
+2024-12-02 10:29:46.570 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-02 10:29:46.571 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 1.2342ms
+2024-12-02 10:29:46.662 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-12-02 10:29:46.687 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 24.9519ms
+2024-12-02 10:29:46.726 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-12-02 10:29:46.747 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 21.1032ms
+2024-12-02 10:29:57.780 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/login - application/json 80
+2024-12-02 10:29:57.780 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:29:57.784 +01:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(P7CreateRestApi.Models.LoginModel) on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-12-02 10:29:57.790 +01:00 [INF] Tentative de connexion pour l'utilisateur user.
+2024-12-02 10:29:57.840 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:29:57.909 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:29:57.913 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:29:57.916 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-12-02 10:29:57.920 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__role_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2024-12-02 10:29:57.921 +01:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2024-12-02 10:29:57.921 +01:00 [INF] Connexion réussie pour l'utilisateur user.
+2024-12-02 10:29:57.923 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:29:57.926 +01:00 [INF] Début de la génération du jeton JWT pour l'utilisateur user (ID: 2)
+2024-12-02 10:29:57.928 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:29:57.928 +01:00 [INF] Récupération des revendications pour l'utilisateur user. Total: 0
+2024-12-02 10:29:57.929 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:29:57.929 +01:00 [INF] Récupération des rôles pour l'utilisateur user. Total: 1. Rôles : 
+2024-12-02 10:29:57.929 +01:00 [INF] - User
+2024-12-02 10:29:57.929 +01:00 [INF] ***
+2024-12-02 10:29:57.929 +01:00 [INF] Les revendications et les rôles ont été ajoutés aux claims du jeton pour l'utilisateur user.
+2024-12-02 10:29:57.929 +01:00 [INF] Clé de sécurité et informations d'identification de signature créées pour le jeton.
+2024-12-02 10:29:57.930 +01:00 [INF] Le jeton JWT a été généré avec succès pour l'utilisateur user.
+2024-12-02 10:29:57.930 +01:00 [INF] Token JWT généré avec succès pour l'utilisateur user.
+2024-12-02 10:29:57.930 +01:00 [INF] Executing OkObjectResult, writing value of type 'P7CreateRestApi.Models.ApiResponse'.
+2024-12-02 10:29:57.931 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi) in 146.9541ms
+2024-12-02 10:29:57.931 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:29:57.932 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/login - 200 null application/json; charset=utf-8 152.5206ms
+2024-12-02 10:30:47.761 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-12-02 10:30:47.764 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 3.4159ms
+2024-12-02 10:30:47.811 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-12-02 10:30:47.812 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-12-02 10:30:47.812 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-02 10:30:47.813 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 1.6494ms
+2024-12-02 10:30:47.816 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 3.1659ms
+2024-12-02 10:30:47.825 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 13.8737ms
+2024-12-02 10:30:47.919 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-12-02 10:30:47.933 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.1344ms
+2024-12-02 10:32:09.016 +01:00 [INF] Démarrage de l'application
+2024-12-02 10:32:09.062 +01:00 [INF] User profile is available. Using 'C:\Users\sprtj\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-12-02 10:32:09.204 +01:00 [INF] Now listening on: https://localhost:7210
+2024-12-02 10:32:09.204 +01:00 [INF] Now listening on: http://localhost:5267
+2024-12-02 10:32:09.234 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-02 10:32:09.234 +01:00 [INF] Hosting environment: Development
+2024-12-02 10:32:09.234 +01:00 [INF] Content root path: C:\Users\sprtj\Documents\GitHub\P7_Binot_Jonathan\P7CreateRestApi
+2024-12-02 10:32:09.674 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-12-02 10:32:09.784 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 113.8059ms
+2024-12-02 10:32:09.815 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-02 10:32:09.815 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-12-02 10:32:09.817 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 2.3261ms
+2024-12-02 10:32:09.822 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 7.7885ms
+2024-12-02 10:32:09.846 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-12-02 10:32:09.874 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 28.8383ms
+2024-12-02 10:32:09.916 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-12-02 10:32:10.020 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 103.8432ms
+2024-12-02 10:32:14.635 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:32:14.682 +01:00 [INF] Authorization failed. These requirements were not met:
+Handler assertion should evaluate to true.
+2024-12-02 10:32:14.685 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:32:14.686 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:32:14.686 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 51.4567ms
+2024-12-02 10:32:15.848 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:32:15.852 +01:00 [INF] Authorization failed. These requirements were not met:
+Handler assertion should evaluate to true.
+2024-12-02 10:32:15.853 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:32:15.853 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:32:15.853 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 5.182ms
+2024-12-02 10:32:25.855 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/login - application/json 80
+2024-12-02 10:32:25.858 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:32:25.886 +01:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(P7CreateRestApi.Models.LoginModel) on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-12-02 10:32:26.037 +01:00 [INF] Tentative de connexion pour l'utilisateur user.
+2024-12-02 10:32:27.404 +01:00 [INF] Executed DbCommand (49ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:32:27.615 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:32:27.645 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:32:27.653 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-12-02 10:32:27.669 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__role_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2024-12-02 10:32:27.683 +01:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2024-12-02 10:32:27.684 +01:00 [INF] Connexion réussie pour l'utilisateur user.
+2024-12-02 10:32:27.688 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:32:27.691 +01:00 [INF] Début de la génération du jeton JWT pour l'utilisateur user (ID: 2)
+2024-12-02 10:32:27.693 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:32:27.693 +01:00 [INF] Récupération des revendications pour l'utilisateur user. Total: 0
+2024-12-02 10:32:27.695 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:32:27.695 +01:00 [INF] Récupération des rôles pour l'utilisateur user. Total: 1.
+2024-12-02 10:32:27.695 +01:00 [INF] user a le rôle User
+2024-12-02 10:32:27.696 +01:00 [INF] Les revendications et les rôles ont été ajoutés aux claims du jeton pour l'utilisateur user.
+2024-12-02 10:32:27.696 +01:00 [INF] Clé de sécurité et informations d'identification de signature créées pour le jeton.
+2024-12-02 10:32:27.699 +01:00 [INF] Le jeton JWT a été généré avec succès pour l'utilisateur user.
+2024-12-02 10:32:27.716 +01:00 [INF] Token JWT généré avec succès pour l'utilisateur user.
+2024-12-02 10:32:27.723 +01:00 [INF] Executing OkObjectResult, writing value of type 'P7CreateRestApi.Models.ApiResponse'.
+2024-12-02 10:32:27.729 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi) in 1839.4636ms
+2024-12-02 10:32:27.730 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:32:27.738 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/login - 200 null application/json; charset=utf-8 1883.3274ms
+2024-12-02 10:32:36.930 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:32:36.932 +01:00 [INF] Authorization failed. These requirements were not met:
+Handler assertion should evaluate to true.
+2024-12-02 10:32:36.932 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:32:36.932 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:32:36.933 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 2.9543ms
+2024-12-02 10:32:49.488 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:32:49.549 +01:00 [INF] Token validated for user: null
+2024-12-02 10:32:49.550 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi)'
+2024-12-02 10:32:49.553 +01:00 [INF] Route matched with {action = "GetAllBids", controller = "BidList"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllBids() on controller P7CreateRestApi.Controllers.BidListController (P7CreateRestApi).
+2024-12-02 10:32:49.555 +01:00 [INF] Tentative de récupération de tous les Bids.
+2024-12-02 10:32:49.615 +01:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[BidListId], [b].[Account], [b].[Ask], [b].[AskQuantity], [b].[Benchmark], [b].[Bid], [b].[BidListDate], [b].[BidQuantity], [b].[BidSecurity], [b].[BidStatus], [b].[BidType], [b].[Book], [b].[Commentary], [b].[CreationDate], [b].[CreationName], [b].[DealName], [b].[DealType], [b].[RevisionDate], [b].[RevisionName], [b].[Side], [b].[SourceListId], [b].[Trader]
+FROM [BidLists] AS [b]
+2024-12-02 10:32:49.659 +01:00 [INF] 3 Bids récupérés avec succès.
+2024-12-02 10:32:49.660 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[P7CreateRestApi.Domain.BidList, P7CreateRestApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-02 10:32:49.681 +01:00 [INF] Executed action P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi) in 127.3523ms
+2024-12-02 10:32:49.681 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi)'
+2024-12-02 10:32:49.682 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 200 null application/json; charset=utf-8 193.8556ms
+2024-12-02 10:33:18.653 +01:00 [INF] Démarrage de l'application
+2024-12-02 10:33:18.702 +01:00 [INF] User profile is available. Using 'C:\Users\sprtj\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-12-02 10:33:18.843 +01:00 [INF] Now listening on: https://localhost:7210
+2024-12-02 10:33:18.843 +01:00 [INF] Now listening on: http://localhost:5267
+2024-12-02 10:33:18.867 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-02 10:33:18.867 +01:00 [INF] Hosting environment: Development
+2024-12-02 10:33:18.867 +01:00 [INF] Content root path: C:\Users\sprtj\Documents\GitHub\P7_Binot_Jonathan\P7CreateRestApi
+2024-12-02 10:33:19.481 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-12-02 10:33:19.589 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 111.5456ms
+2024-12-02 10:33:19.614 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-12-02 10:33:19.614 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-02 10:33:19.616 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 1.9033ms
+2024-12-02 10:33:19.620 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 5.9827ms
+2024-12-02 10:33:19.648 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-12-02 10:33:19.678 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 30.6968ms
+2024-12-02 10:33:19.712 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-12-02 10:33:19.802 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 89.8441ms
+2024-12-02 10:33:30.726 +01:00 [INF] Request starting HTTP/2 DELETE https://localhost:7210/BidList/1 - null null
+2024-12-02 10:33:30.846 +01:00 [INF] Token validated for user: null
+2024-12-02 10:33:30.853 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2024-12-02 10:33:30.857 +01:00 [WRN] Forbidden access attempt to /BidList/1 by Anonymous
+2024-12-02 10:33:30.858 +01:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2024-12-02 10:33:30.858 +01:00 [INF] Request finished HTTP/2 DELETE https://localhost:7210/BidList/1 - 403 0 null 132.5003ms
+2024-12-02 10:33:36.696 +01:00 [INF] Request starting HTTP/2 DELETE https://localhost:7210/BidList/2 - null null
+2024-12-02 10:33:36.700 +01:00 [INF] Token validated for user: null
+2024-12-02 10:33:36.702 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2024-12-02 10:33:36.703 +01:00 [WRN] Forbidden access attempt to /BidList/2 by Anonymous
+2024-12-02 10:33:36.703 +01:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2024-12-02 10:33:36.703 +01:00 [INF] Request finished HTTP/2 DELETE https://localhost:7210/BidList/2 - 403 0 null 7.5716ms
+2024-12-02 10:33:38.682 +01:00 [INF] Request starting HTTP/2 DELETE https://localhost:7210/BidList/3 - null null
+2024-12-02 10:33:38.683 +01:00 [INF] Token validated for user: null
+2024-12-02 10:33:38.685 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2024-12-02 10:33:38.685 +01:00 [WRN] Forbidden access attempt to /BidList/3 by Anonymous
+2024-12-02 10:33:38.685 +01:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2024-12-02 10:33:38.685 +01:00 [INF] Request finished HTTP/2 DELETE https://localhost:7210/BidList/3 - 403 0 null 3.006ms
+2024-12-02 10:34:02.763 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/login - application/json 80
+2024-12-02 10:34:02.764 +01:00 [INF] Token validated for user: null
+2024-12-02 10:34:02.765 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:34:02.784 +01:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(P7CreateRestApi.Models.LoginModel) on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-12-02 10:34:02.931 +01:00 [INF] Tentative de connexion pour l'utilisateur User.
+2024-12-02 10:34:04.260 +01:00 [INF] Executed DbCommand (55ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:34:04.468 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:34:04.494 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:34:04.504 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-12-02 10:34:04.523 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__role_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2024-12-02 10:34:04.536 +01:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2024-12-02 10:34:04.537 +01:00 [INF] Connexion réussie pour l'utilisateur User.
+2024-12-02 10:34:04.542 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:34:04.547 +01:00 [INF] Début de la génération du jeton JWT pour l'utilisateur user (ID: 2)
+2024-12-02 10:34:04.549 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:34:04.550 +01:00 [INF] Récupération des revendications pour l'utilisateur user. Total: 0
+2024-12-02 10:34:04.551 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:34:04.552 +01:00 [INF] Récupération des rôles pour l'utilisateur user. Total: 1.
+2024-12-02 10:34:04.552 +01:00 [INF] user a le rôle User
+2024-12-02 10:34:04.552 +01:00 [INF] Les revendications et les rôles ont été ajoutés aux claims du jeton pour l'utilisateur user.
+2024-12-02 10:34:04.552 +01:00 [INF] Clé de sécurité et informations d'identification de signature créées pour le jeton.
+2024-12-02 10:34:04.555 +01:00 [INF] Le jeton JWT a été généré avec succès pour l'utilisateur user.
+2024-12-02 10:34:04.559 +01:00 [INF] Token JWT généré avec succès pour l'utilisateur User.
+2024-12-02 10:34:04.565 +01:00 [INF] Executing OkObjectResult, writing value of type 'P7CreateRestApi.Models.ApiResponse'.
+2024-12-02 10:34:04.572 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi) in 1783.6836ms
+2024-12-02 10:34:04.573 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:34:04.583 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/login - 200 null application/json; charset=utf-8 1820.6453ms
+2024-12-02 10:34:18.500 +01:00 [INF] Request starting HTTP/2 DELETE https://localhost:7210/BidList/3 - null null
+2024-12-02 10:34:18.501 +01:00 [INF] Token validated for user: null
+2024-12-02 10:34:18.501 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2024-12-02 10:34:18.501 +01:00 [WRN] Forbidden access attempt to /BidList/3 by Anonymous
+2024-12-02 10:34:18.501 +01:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2024-12-02 10:34:18.501 +01:00 [INF] Request finished HTTP/2 DELETE https://localhost:7210/BidList/3 - 403 0 null 1.8594ms
+2024-12-02 10:34:20.968 +01:00 [INF] Request starting HTTP/2 DELETE https://localhost:7210/BidList/5 - null null
+2024-12-02 10:34:20.969 +01:00 [INF] Token validated for user: null
+2024-12-02 10:34:20.969 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2024-12-02 10:34:20.969 +01:00 [WRN] Forbidden access attempt to /BidList/5 by Anonymous
+2024-12-02 10:34:20.969 +01:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2024-12-02 10:34:20.969 +01:00 [INF] Request finished HTTP/2 DELETE https://localhost:7210/BidList/5 - 403 0 null 1.2854ms
+2024-12-02 10:34:23.573 +01:00 [INF] Request starting HTTP/2 DELETE https://localhost:7210/BidList/12 - null null
+2024-12-02 10:34:23.574 +01:00 [INF] Token validated for user: null
+2024-12-02 10:34:23.574 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2024-12-02 10:34:23.574 +01:00 [WRN] Forbidden access attempt to /BidList/12 by Anonymous
+2024-12-02 10:34:23.574 +01:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2024-12-02 10:34:23.574 +01:00 [INF] Request finished HTTP/2 DELETE https://localhost:7210/BidList/12 - 403 0 null 1.2193ms
+2024-12-02 10:34:26.655 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:34:26.656 +01:00 [INF] Token validated for user: null
+2024-12-02 10:34:26.657 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi)'
+2024-12-02 10:34:26.661 +01:00 [INF] Route matched with {action = "GetAllBids", controller = "BidList"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllBids() on controller P7CreateRestApi.Controllers.BidListController (P7CreateRestApi).
+2024-12-02 10:34:26.663 +01:00 [INF] Tentative de récupération de tous les Bids.
+2024-12-02 10:34:26.766 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[BidListId], [b].[Account], [b].[Ask], [b].[AskQuantity], [b].[Benchmark], [b].[Bid], [b].[BidListDate], [b].[BidQuantity], [b].[BidSecurity], [b].[BidStatus], [b].[BidType], [b].[Book], [b].[Commentary], [b].[CreationDate], [b].[CreationName], [b].[DealName], [b].[DealType], [b].[RevisionDate], [b].[RevisionName], [b].[Side], [b].[SourceListId], [b].[Trader]
+FROM [BidLists] AS [b]
+2024-12-02 10:34:26.807 +01:00 [INF] 3 Bids récupérés avec succès.
+2024-12-02 10:34:26.807 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[P7CreateRestApi.Domain.BidList, P7CreateRestApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-02 10:34:26.823 +01:00 [INF] Executed action P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi) in 161.8869ms
+2024-12-02 10:34:26.823 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi)'
+2024-12-02 10:34:26.823 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 200 null application/json; charset=utf-8 167.7886ms
+2024-12-02 10:34:32.225 +01:00 [INF] Request starting HTTP/2 DELETE https://localhost:7210/BidList/1 - null null
+2024-12-02 10:34:32.226 +01:00 [INF] Token validated for user: null
+2024-12-02 10:34:32.226 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2024-12-02 10:34:32.226 +01:00 [WRN] Forbidden access attempt to /BidList/1 by Anonymous
+2024-12-02 10:34:32.226 +01:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2024-12-02 10:34:32.226 +01:00 [INF] Request finished HTTP/2 DELETE https://localhost:7210/BidList/1 - 403 0 null 1.2227ms
+2024-12-02 10:34:39.374 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:7210/BidList/1 - application/json 565
+2024-12-02 10:34:39.375 +01:00 [INF] Token validated for user: null
+2024-12-02 10:34:39.375 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2024-12-02 10:34:39.375 +01:00 [WRN] Forbidden access attempt to /BidList/1 by Anonymous
+2024-12-02 10:34:39.375 +01:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2024-12-02 10:34:39.375 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:7210/BidList/1 - 403 0 null 1.513ms
+2024-12-02 10:35:03.402 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/login - application/json 82
+2024-12-02 10:35:03.405 +01:00 [INF] Token validated for user: null
+2024-12-02 10:35:03.405 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:35:03.406 +01:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(P7CreateRestApi.Models.LoginModel) on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-12-02 10:35:03.409 +01:00 [INF] Tentative de connexion pour l'utilisateur Admin.
+2024-12-02 10:35:03.425 +01:00 [INF] Executed DbCommand (6ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:35:03.494 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:35:03.497 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:35:03.499 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-12-02 10:35:03.502 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__role_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2024-12-02 10:35:03.503 +01:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2024-12-02 10:35:03.503 +01:00 [INF] Connexion réussie pour l'utilisateur Admin.
+2024-12-02 10:35:03.504 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:35:03.505 +01:00 [INF] Début de la génération du jeton JWT pour l'utilisateur admin (ID: 1)
+2024-12-02 10:35:03.506 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:35:03.506 +01:00 [INF] Récupération des revendications pour l'utilisateur admin. Total: 0
+2024-12-02 10:35:03.508 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:35:03.508 +01:00 [INF] Récupération des rôles pour l'utilisateur admin. Total: 1.
+2024-12-02 10:35:03.508 +01:00 [INF] admin a le rôle Admin
+2024-12-02 10:35:03.509 +01:00 [INF] Les revendications et les rôles ont été ajoutés aux claims du jeton pour l'utilisateur admin.
+2024-12-02 10:35:03.509 +01:00 [INF] Clé de sécurité et informations d'identification de signature créées pour le jeton.
+2024-12-02 10:35:03.509 +01:00 [INF] Le jeton JWT a été généré avec succès pour l'utilisateur admin.
+2024-12-02 10:35:03.509 +01:00 [INF] Token JWT généré avec succès pour l'utilisateur Admin.
+2024-12-02 10:35:03.509 +01:00 [INF] Executing OkObjectResult, writing value of type 'P7CreateRestApi.Models.ApiResponse'.
+2024-12-02 10:35:03.509 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi) in 103.4075ms
+2024-12-02 10:35:03.509 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:35:03.509 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/login - 200 null application/json; charset=utf-8 107.5016ms
+2024-12-02 10:35:24.610 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:35:24.613 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:35:24.616 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:35:24.617 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:35:24.617 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 8.0899ms
+2024-12-02 10:35:26.016 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:35:26.017 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:35:26.017 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:35:26.017 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:35:26.017 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 1.1055ms
+2024-12-02 10:35:26.433 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:35:26.433 +01:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (User|Admin)
+2024-12-02 10:35:26.433 +01:00 [WRN] Unauthorized access attempt to /BidList
+2024-12-02 10:35:26.433 +01:00 [INF] AuthenticationScheme: Bearer was challenged.
+2024-12-02 10:35:26.433 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 401 0 null 0.9283ms
+2024-12-02 10:35:44.688 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.html - null null
+2024-12-02 10:35:44.697 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.html - 200 null text/html;charset=utf-8 9.6326ms
+2024-12-02 10:35:44.728 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-02 10:35:44.731 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/index.js - null null
+2024-12-02 10:35:44.733 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 5.3273ms
+2024-12-02 10:35:44.734 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/index.js - 200 null application/javascript;charset=utf-8 2.6786ms
+2024-12-02 10:35:44.752 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/_vs/browserLink - null null
+2024-12-02 10:35:44.775 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/_vs/browserLink - 200 null text/javascript; charset=UTF-8 24.0207ms
+2024-12-02 10:35:44.852 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - null null
+2024-12-02 10:35:44.866 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.6225ms
+2024-12-02 10:35:58.685 +01:00 [INF] Request starting HTTP/2 POST https://localhost:7210/api/Login/login - application/json 82
+2024-12-02 10:35:58.685 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:35:58.685 +01:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(P7CreateRestApi.Models.LoginModel) on controller P7CreateRestApi.Controllers.LoginController (P7CreateRestApi).
+2024-12-02 10:35:58.696 +01:00 [INF] Tentative de connexion pour l'utilisateur Admin.
+2024-12-02 10:35:58.700 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:35:58.769 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:35:58.770 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:35:58.771 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-12-02 10:35:58.773 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__role_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2024-12-02 10:35:58.774 +01:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2024-12-02 10:35:58.774 +01:00 [INF] Connexion réussie pour l'utilisateur Admin.
+2024-12-02 10:35:58.774 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[Fullname], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-12-02 10:35:58.775 +01:00 [INF] Début de la génération du jeton JWT pour l'utilisateur admin (ID: 1)
+2024-12-02 10:35:58.775 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-12-02 10:35:58.776 +01:00 [INF] Récupération des revendications pour l'utilisateur admin. Total: 0
+2024-12-02 10:35:58.776 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-12-02 10:35:58.777 +01:00 [INF] Récupération des rôles pour l'utilisateur admin. Total: 1.
+2024-12-02 10:35:58.777 +01:00 [INF] admin a le rôle Admin
+2024-12-02 10:35:58.777 +01:00 [INF] Les revendications et les rôles ont été ajoutés aux claims du jeton pour l'utilisateur admin.
+2024-12-02 10:35:58.777 +01:00 [INF] Clé de sécurité et informations d'identification de signature créées pour le jeton.
+2024-12-02 10:35:58.777 +01:00 [INF] Le jeton JWT a été généré avec succès pour l'utilisateur admin.
+2024-12-02 10:35:58.777 +01:00 [INF] Token JWT généré avec succès pour l'utilisateur Admin.
+2024-12-02 10:35:58.777 +01:00 [INF] Executing OkObjectResult, writing value of type 'P7CreateRestApi.Models.ApiResponse'.
+2024-12-02 10:35:58.777 +01:00 [INF] Executed action P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi) in 91.8015ms
+2024-12-02 10:35:58.777 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.LoginController.Login (P7CreateRestApi)'
+2024-12-02 10:35:58.777 +01:00 [INF] Request finished HTTP/2 POST https://localhost:7210/api/Login/login - 200 null application/json; charset=utf-8 93.2078ms
+2024-12-02 10:36:07.795 +01:00 [INF] Request starting HTTP/2 GET https://localhost:7210/BidList - null null
+2024-12-02 10:36:07.796 +01:00 [INF] Token validated for user: null
+2024-12-02 10:36:07.796 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi)'
+2024-12-02 10:36:07.796 +01:00 [INF] Route matched with {action = "GetAllBids", controller = "BidList"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllBids() on controller P7CreateRestApi.Controllers.BidListController (P7CreateRestApi).
+2024-12-02 10:36:07.797 +01:00 [INF] Tentative de récupération de tous les Bids.
+2024-12-02 10:36:07.801 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[BidListId], [b].[Account], [b].[Ask], [b].[AskQuantity], [b].[Benchmark], [b].[Bid], [b].[BidListDate], [b].[BidQuantity], [b].[BidSecurity], [b].[BidStatus], [b].[BidType], [b].[Book], [b].[Commentary], [b].[CreationDate], [b].[CreationName], [b].[DealName], [b].[DealType], [b].[RevisionDate], [b].[RevisionName], [b].[Side], [b].[SourceListId], [b].[Trader]
+FROM [BidLists] AS [b]
+2024-12-02 10:36:07.801 +01:00 [INF] 3 Bids récupérés avec succès.
+2024-12-02 10:36:07.802 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[P7CreateRestApi.Domain.BidList, P7CreateRestApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-02 10:36:07.802 +01:00 [INF] Executed action P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi) in 5.8349ms
+2024-12-02 10:36:07.802 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.BidListController.GetAllBids (P7CreateRestApi)'
+2024-12-02 10:36:07.803 +01:00 [INF] Request finished HTTP/2 GET https://localhost:7210/BidList - 200 null application/json; charset=utf-8 7.9683ms
+2024-12-02 10:36:25.033 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:7210/BidList/2 - application/json 608
+2024-12-02 10:36:25.034 +01:00 [INF] Token validated for user: null
+2024-12-02 10:36:25.034 +01:00 [INF] Executing endpoint 'P7CreateRestApi.Controllers.BidListController.UpdateBid (P7CreateRestApi)'
+2024-12-02 10:36:25.040 +01:00 [INF] Route matched with {action = "UpdateBid", controller = "BidList"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateBid(Int32, P7CreateRestApi.Domain.BidList) on controller P7CreateRestApi.Controllers.BidListController (P7CreateRestApi).
+2024-12-02 10:36:25.062 +01:00 [INF] Tentative de mise à jour du Bid avec ID 2.
+2024-12-02 10:36:25.152 +01:00 [INF] Executed DbCommand (8ms) [Parameters=[@p21='?' (DbType = Int32), @p0='?' (Size = 50), @p1='?' (DbType = Double), @p2='?' (DbType = Double), @p3='?' (Size = 100), @p4='?' (DbType = Double), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Double), @p7='?' (Size = 50), @p8='?' (Size = 50), @p9='?' (Size = 50), @p10='?' (Size = 50), @p11='?' (Size = 250), @p12='?' (DbType = DateTime2), @p13='?' (Size = 100), @p14='?' (Size = 100), @p15='?' (Size = 50), @p16='?' (DbType = DateTime2), @p17='?' (Size = 100), @p18='?' (Size = 50), @p19='?' (Size = 50), @p20='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [BidLists] SET [Account] = @p0, [Ask] = @p1, [AskQuantity] = @p2, [Benchmark] = @p3, [Bid] = @p4, [BidListDate] = @p5, [BidQuantity] = @p6, [BidSecurity] = @p7, [BidStatus] = @p8, [BidType] = @p9, [Book] = @p10, [Commentary] = @p11, [CreationDate] = @p12, [CreationName] = @p13, [DealName] = @p14, [DealType] = @p15, [RevisionDate] = @p16, [RevisionName] = @p17, [Side] = @p18, [SourceListId] = @p19, [Trader] = @p20
+OUTPUT 1
+WHERE [BidListId] = @p21;
+2024-12-02 10:36:25.167 +01:00 [INF] Bid avec ID 2 mis à jour avec succès.
+2024-12-02 10:36:25.167 +01:00 [INF] Executing OkObjectResult, writing value of type 'P7CreateRestApi.Domain.BidList'.
+2024-12-02 10:36:25.167 +01:00 [INF] Executed action P7CreateRestApi.Controllers.BidListController.UpdateBid (P7CreateRestApi) in 126.2714ms
+2024-12-02 10:36:25.167 +01:00 [INF] Executed endpoint 'P7CreateRestApi.Controllers.BidListController.UpdateBid (P7CreateRestApi)'
+2024-12-02 10:36:25.167 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:7210/BidList/2 - 200 null application/json; charset=utf-8 133.9028ms

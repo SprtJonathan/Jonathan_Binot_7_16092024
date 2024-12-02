@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using P7CreateRestApi.Domain;
+using System.Data;
 
 namespace P7CreateRestApi.Services
 {
@@ -30,7 +31,9 @@ namespace P7CreateRestApi.Services
 
             // Récupérer les rôles de l'utilisateur
             var userRoles = await _userManager.GetRolesAsync(user);
-            _logger.LogInformation("Récupération des rôles pour l'utilisateur {UserName}. Total: {RolesCount}", user.UserName, userRoles.Count);
+            _logger.LogInformation("Récupération des rôles pour l'utilisateur {UserName}. Total: {RolesCount}.", user.UserName, userRoles.Count);
+            foreach (var role in userRoles)
+                _logger.LogInformation("{UserName} a le rôle {UserRole}", user.UserName, role);
 
             // Ajouter les revendications et les rôles aux claims du jeton
             var claims = new[]
