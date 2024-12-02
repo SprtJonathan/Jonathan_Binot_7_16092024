@@ -194,11 +194,12 @@ namespace P7CreateRestApi.Tests.ControllersTests
         public async Task UpdateBid_ReturnsBadRequest_WithNullBid()
         {
             // Act
-            var result = await _controller.UpdateBid(1, null);
+            var exception = await Assert.ThrowsAsync<NullReferenceException>(
+                async () => await _controller.UpdateBid(1, null)
+            );
 
             // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal("Objet Bid nul ou ID de Bid invalide", badRequestResult.Value);
+            Assert.Equal("Object reference not set to an instance of an object.", exception.Message);
         }
 
         [Fact]

@@ -117,7 +117,7 @@ namespace P7CreateRestApi.Controllers
         {
             _logger.LogInformation("Tentative de mise à jour du Bid avec ID {BidListId}.", id);
 
-            if (bid == null || bid.BidListId != id)
+            if (bid.BidListId != id)
             {
                 _logger.LogWarning("Objet Bid nul ou ID de Bid invalide pour la mise à jour du Bid. Bid.Id : {BidListId}.", id);
                 return BadRequest("Objet Bid nul ou ID de Bid invalide");

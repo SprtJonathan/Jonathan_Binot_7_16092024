@@ -58,7 +58,7 @@ namespace P7CreateRestApi.Services
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddMinutes(1),
                 signingCredentials: creds);
 
             _logger.LogInformation("Le jeton JWT a été généré avec succès pour l'utilisateur {UserName}.", user.UserName);
