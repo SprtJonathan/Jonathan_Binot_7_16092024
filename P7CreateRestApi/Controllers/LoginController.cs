@@ -56,9 +56,20 @@ namespace P7CreateRestApi.Controllers
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
+            var token = HttpContext.Request.Headers.Authorization.ToString().Replace("Bearer ", "");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return BadRequest(new ApiResponse { Message = "Token manquant." });
+            }
             _logger.LogInformation("Déconnexion de l'utilisateur.");
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation("Déconnexion réussie.");
+
+            // Révoquer le token
+            var tokenRevocationService = HttpContext.RequestServices.GetRequiredService<ITokenRevocationService>();
+            await tokenRevocationService.RevokeTokenAsync(token);
+
+            _logger.LogInformation("Token révoqué : {Token} - Déconnexion réussie", token);
+
             return Ok(new ApiResponse { Message = "Déconnexion réussie." });
         }
     }

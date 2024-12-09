@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace P7CreateRestApi.Tests.ControllersTests
 {
@@ -19,6 +20,7 @@ namespace P7CreateRestApi.Tests.ControllersTests
         private readonly Mock<SignInManager<User>> _mockSignInManager;
         private readonly Mock<IJwtService> _mockJwtService;
         private readonly Mock<ILogger<LoginController>> _mockLogger;
+        private readonly Mock<ITokenRevocationService> _mockTokenRevocationService;
         private readonly LoginController _controller;
 
         public LoginControllerTests()
@@ -35,7 +37,20 @@ namespace P7CreateRestApi.Tests.ControllersTests
 
             _mockJwtService = new Mock<IJwtService>();
             _mockLogger = new Mock<ILogger<LoginController>>();
+            _mockTokenRevocationService = new Mock<ITokenRevocationService>();
+
             _controller = new LoginController(_mockSignInManager.Object, _mockJwtService.Object, _mockLogger.Object);
+
+            // Inject token revocation service into HttpContext
+            _controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext
+                {
+                    RequestServices = new ServiceCollection()
+                        .AddSingleton(_mockTokenRevocationService.Object)
+                        .BuildServiceProvider()
+                }
+            };
         }
 
         [Fact]
@@ -126,10 +141,14 @@ namespace P7CreateRestApi.Tests.ControllersTests
         }
 
         [Fact]
-        public async Task Logout_ShouldReturnOk()
+        public async Task Logout_ShouldReturnOk_WhenTokenIsValid()
         {
             // Arrange
+            var token = "valid_token";
+            _controller.HttpContext.Request.Headers.Authorization = $"Bearer {token}";
+
             _mockSignInManager.Setup(s => s.SignOutAsync()).Returns(Task.CompletedTask);
+            _mockTokenRevocationService.Setup(s => s.RevokeTokenAsync(token)).Returns(Task.CompletedTask);
 
             // Act
             var result = await _controller.Logout();
@@ -139,7 +158,24 @@ namespace P7CreateRestApi.Tests.ControllersTests
             var response = Assert.IsType<ApiResponse>(okResult.Value);
 
             Assert.Equal("Déconnexion réussie.", response.Message);
-            Assert.Null(response.Token);
+
+            _mockTokenRevocationService.Verify(s => s.RevokeTokenAsync(token), Times.Once);
+        }
+
+        [Fact]
+        public async Task Logout_ShouldReturnBadRequest_WhenTokenIsMissing()
+        {
+            // Arrange
+            _controller.HttpContext.Request.Headers.Authorization = string.Empty;
+
+            // Act
+            var result = await _controller.Logout();
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            var response = Assert.IsType<ApiResponse>(badRequestResult.Value);
+
+            Assert.Equal("Token manquant.", response.Message);
         }
     }
 }

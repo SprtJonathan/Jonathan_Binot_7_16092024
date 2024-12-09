@@ -55,11 +55,23 @@ builder.Services.AddAuthentication(options =>
             logger.LogError("Authentication failed: {Message}", context.Exception.Message);
             return Task.CompletedTask;
         },
-        OnTokenValidated = context =>
+        OnTokenValidated = async context =>
         {
             var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
             logger.LogInformation("Token validated for user: {UserName}", context.Principal?.Identity?.Name);
-            return Task.CompletedTask;
+
+            // Vérification des tokens révoqués
+            var tokenRevocationService = context.HttpContext.RequestServices.GetRequiredService<ITokenRevocationService>();
+            var token = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+            if (await tokenRevocationService.IsTokenRevokedAsync(token))
+            {
+                logger.LogWarning("Token révoqué détecté pour l'utilisateur {UserName}.", context.Principal?.Identity?.Name);
+                context.Fail("Token révoqué.");
+                return;
+            }
+
+            logger.LogInformation("Token non révoqué pour l'utilisateur {UserName}.", context.Principal?.Identity?.Name);
         },
         OnChallenge = context =>
         {
@@ -116,7 +128,8 @@ builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 builder.Services.AddScoped<IRuleRepository, RuleRepository>();
 builder.Services.AddScoped<ITradeRepository, TradeRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IJwtService, JwtService>(); 
+builder.Services.AddSingleton<ITokenRevocationService, TokenRevocationService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
