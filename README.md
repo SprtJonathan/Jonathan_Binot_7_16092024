@@ -32,11 +32,15 @@ Puis une fois la migration ajoutée, effectuez un ``Update-Database``
 
 ### Les comptes utilisateurs présents en base sont les suivants :
 **User** :
+
 *Nom d'utilisateur* : User
+
 *Mot de passe* : UserPassword123!
 
 **Admin** :
+
 *Nom d'utilisateur* : Admin
+
 *Mot de passe* : AdminPassword123!
 
 
